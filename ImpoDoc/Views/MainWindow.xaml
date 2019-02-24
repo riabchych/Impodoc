@@ -1,0 +1,50 @@
+﻿<Window x:Class="ImpoDoc.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:res="clr-namespace:ImpoDoc.Properties"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="32" />
+            <RowDefinition />
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <Menu Background="{x:Null}">
+            <MenuItem Header="{x:Static res:Resources.File}" Foreground="Black">
+                <MenuItem Header="{x:Static res:Resources.Create}" Command="{Binding NewCommand}" />
+                <MenuItem Header="{x:Static res:Resources.Open}" Command="{Binding AddCommand}" />
+                <Separator />
+                <MenuItem Header="{x:Static res:Resources.Import}" Command="{Binding ImportCommand}" />
+                <MenuItem Header="{x:Static res:Resources.Export}" />
+                <Separator />
+                <MenuItem Header="{x:Static res:Resources.Exit}" />
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resources.Edit}">
+                <MenuItem Header="{x:Static res:Resources.ApplyChanges}" Command="{Binding EditCommand}"
+                                  IsEnabled="{Binding IsSelected, Mode=OneWay}" />
+                <MenuItem Header="{x:Static res:Resources.Cut}" Command="{Binding CutCommand}"
+                                  IsEnabled="{Binding SelectedTelegrams.Count, Mode=OneWay}" />
+                <MenuItem Header="{x:Static res:Resources.Copy}" Command="{Binding CopyCommand}"
+                                  IsEnabled="{Binding SelectedTelegrams.Count, Mode=OneWay}" />
+                <MenuItem Header="{x:Static res:Resources.Delete}" Command="{Binding DeleteCommand}"
+                                  IsEnabled="{Binding SelectedTelegrams.Count, Mode=OneWay}" />
+                <MenuItem Header="{x:Static res:Resources.Insert}" />
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resources.Service}">
+                <MenuItem Header="{x:Static res:Resources.Employees}" Click="MenuItem_Click" />
+                <MenuItem Header="{x:Static res:Resources.Maintenance}" />
+                <MenuItem Header="{x:Static res:Resources.ArchiveAndRecovery}" />
+                <Separator />
+                <MenuItem Header="{x:Static res:Resources.Settings}" />
+            </MenuItem>
+            <MenuItem Header="{x:Static res:Resources.Help}">
+                <MenuItem Header="{x:Static res:Resources.ShowInfo}" />
+                <MenuItem Header="{x:Static res:Resources.AboutApp}" />
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>
