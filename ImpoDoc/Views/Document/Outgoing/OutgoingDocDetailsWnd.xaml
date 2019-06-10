@@ -1,0 +1,173 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Name="window"
+        x:Class="ImpoDoc.Views.Document.Outgoing.OutgoingDocDetailsWnd"
+        mc:Ignorable="d"
+        Title="Вихідний документ" 
+        Height="480" 
+        Width="750" 
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Padding" Value="0 3" />
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                    <Setter Property="Foreground" Value="Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type DatePicker}">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Padding" Value="0 3" />
+        </Style>
+
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Padding" Value="0 4" />
+        </Style>
+
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="2" />
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="Padding" Value="0 3" />
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <Binding Mode="OneWay" Path="OutgoingDocDetailsVM" Source="{StaticResource Locator}"/>
+    </Window.DataContext>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=window, Mode=OneWay}"/>
+        <KeyBinding Key="Esc" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=window, Mode=OneWay}"/>
+    </Window.InputBindings>
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="120*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="120*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="120*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32*" />
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="32*" />
+            <RowDefinition Height="32*" />
+            <RowDefinition Height="32*" />
+            <RowDefinition Height="32*" />
+            <RowDefinition Height="32*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Індекс документа" Grid.Column="0" Grid.Row="0"  />
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding ActiveItem.OutgoingIndex}" />
+
+        <TextBlock Text="Дата відправлення" Grid.Column="2" Grid.Row="0"  />
+        <DatePicker Grid.Column="3" Grid.Row="0" SelectedDate="{Binding ActiveItem.SentAt}"  />
+
+        <TextBlock Text="Кореспондент" Grid.Column="4" Grid.Row="1"/>
+        <ComboBox Grid.Column="5" Grid.Row="1"
+                  ItemsSource="{Binding CompanyListVM.Items, Source={StaticResource Locator}}" 
+                  DisplayMemberPath="Title" 
+                  SelectedItem="{Binding ActiveItem.Correspondent}"
+                  Text="{Binding ActiveItem.Correspondent.Title}"/>
+
+        <TextBlock Text="Індекс кореспондента" Grid.Column="0" Grid.Row="1"  />
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding ActiveItem.IncomingIndex}"  />
+
+        <TextBlock Text="Дата отримання" Grid.Column="2" Grid.Row="1"  />
+        <DatePicker Grid.Column="3" Grid.Row="1" SelectedDate="{Binding ActiveItem.ReceivedAt}" />
+
+        <TextBlock Text="Тип документа" Grid.Row="2" Grid.Column="4"/>
+        <TextBox Grid.Column="6" Grid.Row="2" Text="{Binding ActiveItem.DocumentType}" />
+
+        <TextBlock Text="Назва документа" Grid.Row="2"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Text="{Binding ActiveItem.Name}" />
+
+        <TextBlock VerticalAlignment="Top" Text="Короткий зміст" Grid.Row="3"/>
+        <TextBox VerticalAlignment="Stretch" AcceptsReturn="True" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="5" TextWrapping="Wrap" Text="{Binding ActiveItem.Description}"/>
+
+        <TextBlock Text="Носій" Grid.Row="5"/>
+        <TextBox Grid.Column="1" Grid.Row="5"  Text="{Binding ActiveItem.Media}" />
+
+        <TextBlock Text="Файл" Grid.Column="2" Grid.Row="5"/>
+        <Grid Grid.Column="3" Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Width="Auto" Margin="2 2 0 2" Text="{Binding ActiveItem.Attachment.Filename}" />
+            <Button Grid.Column="1" Content="..."  VerticalAlignment="Center"  Width="Auto" Command="{Binding SelectFileCommand}" />
+        </Grid>
+
+        <TextBlock Text="Виконавець" Grid.Row="6"/>
+        <ComboBox Grid.Column="1"  Grid.Row="6" 
+                  ItemsSource="{Binding EmployeeListVM.Items, Source={StaticResource Locator}}" 
+                  DisplayMemberPath="LastName" 
+                  SelectedItem="{Binding ActiveItem.Execution.Executor}"
+                  Text="{Binding ActiveItem.Execution.Executor.LastName}" />
+
+        <TextBlock Text="Дата документа" Grid.Column="4" Grid.Row="0"  />
+        <DatePicker Grid.Column="5" Grid.Row="0" SelectedDate="{Binding ActiveItem.CreatedAt}"  />
+
+        <TextBlock Text="На контроль" Grid.Column="2" Grid.Row="6"  />
+        <CheckBox Grid.Row="6" Grid.Column="3" IsChecked="{Binding ActiveItem.Checkout.Status}" />
+
+        <TextBlock Text="Дата контролю" Grid.Column="4" Grid.Row="6"  />
+        <DatePicker Grid.Column="5" Grid.Row="6" SelectedDate="{Binding ActiveItem.Checkout.Date}"  />
+
+        <TextBlock Text="Дата виконання" Grid.Column="4" Grid.Row="7"  />
+        <DatePicker Grid.Column="5" Grid.Row="7" SelectedDate="{Binding ActiveItem.Execution.CompletedAt}" />
+
+        <TextBlock Text="Відмітка про виконання"  Grid.Row="7"/>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="7" Text="{Binding ActiveItem.Execution.Result}"/>
+
+        <TextBlock Text="Кількість аркушів" Grid.Row="8"/>
+        <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding ActiveItem.Counter.Sheets}"/>
+
+        <TextBlock Text="Кількість екземплярів" Grid.Column="2" Grid.Row="8"/>
+        <TextBox Grid.Column="3" Grid.Row="8" Text="{Binding ActiveItem.Counter.Copy}"/>
+
+        <TextBlock Text="Місце знаходження" Grid.Column="4" Grid.Row="8"/>
+        <TextBox Grid.Column="5" Grid.Row="8" Text="{Binding ActiveItem.Location}"/>
+        <Separator 
+            Margin="0 5"
+            Height="4"
+            Width="Auto"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"                   
+            Background="#FF919191" 
+            Grid.Row="9"
+            Grid.ColumnSpan="6"/>
+
+        <StackPanel Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="4" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button  Content="Відкрити додаток" Width="150" Command="{Binding OpenFileCommand, Mode=OneWay}" />
+            <Button  Content="Друкувати додаток" Width="120" Command="{Binding PrintFileComand, Mode=OneWay}" Margin="2,0,2,2"/>
+            <Button  Content="Зберегти" Width="100" Margin="50 2 2 2" Command="{Binding SaveCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=window, Mode=OneWay}" />
+        </StackPanel>
+    </Grid>
+</Window>

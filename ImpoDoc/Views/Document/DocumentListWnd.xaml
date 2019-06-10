@@ -1,0 +1,176 @@
+﻿<Window x:Class="ImpoDoc.Views.Document.DocumentListWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:common="clr-namespace:ImpoDoc.Common"
+        xmlns:res="clr-namespace:ImpoDoc.Properties"
+        mc:Ignorable="d"
+        Title="Список документов" Height="450" Width="780"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <ResourceDictionary Source="/ImpoDoc;component/Properties/IconDictionary.xaml" />
+    </Window.Resources>
+    <Window.DataContext>
+        <Binding Mode="OneWay" Path="DocumentVM" Source="{StaticResource Locator}"/>
+    </Window.DataContext>
+
+    <extToolkit:BusyIndicator BusyContent="{Binding Path=(common:BusyStatus.Content)}" IsBusy="{Binding Path=(common:BusyStatus.IsBusy)}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="36" />
+                <RowDefinition />
+                <RowDefinition Height="24" />
+            </Grid.RowDefinitions>
+
+            <Menu Background="{x:Null}">
+                <MenuItem Header="{x:Static res:Resources.File}" Foreground="Black">
+                    <MenuItem Header="{x:Static res:Resources.Create}" Command="{Binding NewCommand}" />
+                    <MenuItem Header="{x:Static res:Resources.Open}" Command="{Binding AddCommand}" />
+                    <Separator />
+                    <MenuItem Header="{x:Static res:Resources.Import}" Command="{Binding ImportCommand}" />
+                    <MenuItem Header="{x:Static res:Resources.Export}" />
+                    <Separator />
+                    <MenuItem Header="{x:Static res:Resources.Exit}" />
+                </MenuItem>
+                <MenuItem Header="{x:Static res:Resources.Edit}">
+                    <MenuItem Header="{x:Static res:Resources.ApplyChanges}" Command="{Binding EditCommand}"
+                                  IsEnabled="{Binding IsSelected, Mode=OneWay}" />
+                    <MenuItem Header="{x:Static res:Resources.Cut}" Command="{Binding CutCommand}"
+                                  IsEnabled="{Binding SelectedDocuments.Count, Mode=OneWay}" />
+                    <MenuItem Header="{x:Static res:Resources.Copy}" Command="{Binding CopyCommand}"
+                                  IsEnabled="{Binding SelectedDocuments.Count, Mode=OneWay}" />
+                    <MenuItem Header="{x:Static res:Resources.Delete}" Command="{Binding DeleteCommand}"
+                                  IsEnabled="{Binding SelectedDocuments.Count, Mode=OneWay}" />
+                    <MenuItem Header="{x:Static res:Resources.Insert}" />
+                </MenuItem>
+                <MenuItem Header="{x:Static res:Resources.Service}">
+                    <MenuItem Header="{x:Static res:Resources.Employees}" Command="{Binding ViewEmployeeListCommand}" />
+                    <MenuItem Header="Підприємства" Command="{Binding ViewCompanyListCommand}" />
+                    <MenuItem Header="{x:Static res:Resources.Maintenance}" />
+                    <MenuItem Header="{x:Static res:Resources.ArchiveAndRecovery}" />
+                    <Separator />
+                    <MenuItem Header="{x:Static res:Resources.Settings}" />
+                </MenuItem>
+                <MenuItem Header="{x:Static res:Resources.Help}">
+                    <MenuItem Header="{x:Static res:Resources.ShowInfo}" />
+                    <MenuItem Header="{x:Static res:Resources.AboutApp}" />
+                </MenuItem>
+            </Menu>
+
+            <ToolBarTray Height="36" Grid.Row="1" VerticalAlignment="Top" >
+                <ToolBar Height="36" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  >
+                    <Button ToolTip="{x:Static res:Resources.View}" Command="{Binding ViewItemDetailsCommand}">
+                        <Path Stretch="Uniform" Fill="#FF000000"  Data="{DynamicResource UserIcon}" />
+                    </Button>
+                    <Button ToolTip="{x:Static res:Resources.Create}" Command="{Binding CreateItemCommand}">
+                        <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserAddIcon}"/>
+                    </Button>
+                    <Button ToolTip="{x:Static res:Resources.Delete}" Command="{Binding RemoveItemCommand}">
+                        <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserDeleteIcon}"/>
+                    </Button>
+                    <Separator />
+                    <TextBlock Text="{x:Static res:Resources.Filter}" Margin="0,7,0,4" ></TextBlock>
+                    <TextBox Width="150" Margin="0,5,0,4"></TextBox>
+                </ToolBar>
+            </ToolBarTray>
+
+            <TabControl 
+                Grid.Row="2"
+                VerticalAlignment="Stretch" 
+                HorizontalAlignment="Stretch"
+                SelectedIndex="{Binding CurrentSectionIndex}">
+
+                <TabItem Header="Вхідні"  DataContext="{Binding IncomingDocListVM, Mode=OneWay, Source={StaticResource Locator}}">
+                    <ListView SelectedItem="{Binding SelectedItem}" 
+                        SelectionMode="Single" 
+                        Name="IncomingList" 
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch" 
+                        ItemsSource="{Binding Items}">
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding ViewItemDetailsCommand, Mode=OneWay}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Дата документу" Width="100" DisplayMemberBinding="{Binding CreatedAt}" />
+                                <GridViewColumn Header="Індекс" Width="100" DisplayMemberBinding="{Binding OutgoingIndex}"/>
+                                <GridViewColumn Header="Індекс кореспондента" Width="100" DisplayMemberBinding="{Binding IncomingIndex}" />
+                                <GridViewColumn Header="Кореспондент" Width="100" DisplayMemberBinding="{Binding Correspondent.Title}" />
+                                <GridViewColumn Header="Дата надходження" Width="100" DisplayMemberBinding="{Binding ReceivedAt}" />
+                                <GridViewColumn Header="Тип документу" Width="100" DisplayMemberBinding="{Binding DocumentType}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </TabItem>
+                <TabItem Header="Вихідні"  DataContext="{Binding OutgoingDocListVM, Mode=OneWay}">
+                    <ListView SelectedItem="{Binding SelectedItem}" 
+                        SelectionMode="Single" 
+                        Name="OutgoingList" 
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch" 
+                        ItemsSource="{Binding Items}">
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding ViewItemDetailsCommand, Mode=OneWay}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Дата документу" Width="100" DisplayMemberBinding="{Binding CreatedAt}" />
+                                <GridViewColumn Header="Індекс" Width="100" DisplayMemberBinding="{Binding OutgoingIndex}"/>
+                                <GridViewColumn Header="Індекс кореспондента" Width="100" DisplayMemberBinding="{Binding IncomingIndex}" />
+                                <GridViewColumn Header="Кореспондент" Width="100" DisplayMemberBinding="{Binding Correspondent.Title}" />
+                                <GridViewColumn Header="Дата надходження" Width="100" DisplayMemberBinding="{Binding ReceivedAt}" />
+                                <GridViewColumn Header="Тип документу" Width="100" DisplayMemberBinding="{Binding DocumentType}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </TabItem>
+                <TabItem Header="Внутрішні" DataContext="{Binding InternalDocListVM, Mode=OneWay}">
+                    <ListView SelectedItem="{Binding SelectedItem}" 
+                        SelectionMode="Single" 
+                        Name="InternalList" 
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch" 
+                        ItemsSource="{Binding Items}">
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding ViewItemDetailsCommand, Mode=OneWay}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Дата документу" Width="100" DisplayMemberBinding="{Binding CreatedAt}" />
+                                <GridViewColumn Header="Індекс адресанта" Width="100" DisplayMemberBinding="{Binding OutgoingIndex}"/>
+                                <GridViewColumn Header="Індекс адресата" Width="100" DisplayMemberBinding="{Binding IncomingIndex}" />
+                                <GridViewColumn Header="Назва документу" Width="100" DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn Header="Адресат" Width="100" DisplayMemberBinding="{Binding Addressee.LastName}" />
+                                <GridViewColumn Header="Адресант" Width="100" DisplayMemberBinding="{Binding Addresser.LastName}" />
+                                <GridViewColumn Header="Дата надходження" Width="100" DisplayMemberBinding="{Binding ReceivedAt}" />
+                                <GridViewColumn Header="Тип документу" Width="100" DisplayMemberBinding="{Binding DocumentType}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </TabItem>
+            </TabControl>
+
+            <StatusBar Grid.Row="3" VerticalAlignment="Stretch" >
+                <TextBlock Name="StatusText" Text="{Binding StatusText}"></TextBlock>
+            </StatusBar>
+
+        </Grid>
+    </extToolkit:BusyIndicator>
+</Window>

@@ -1,0 +1,77 @@
+﻿<Window x:Class="ImpoDoc.Views.EmployeeListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:common="clr-namespace:ImpoDoc.Common"
+        xmlns:res="clr-namespace:ImpoDoc.Properties"
+        mc:Ignorable="d"
+        Title="{x:Static res:Resources.EmployeeListTitle}" 
+        Height="450" 
+        Width="800" 
+        WindowStartupLocation="CenterOwner" 
+        DataContext="{Binding EmployeeListVM, Mode=OneWay, Source={StaticResource Locator}}">
+
+    <Window.Resources>
+        <ResourceDictionary Source="/ImpoDoc;component/Properties/IconDictionary.xaml" />
+    </Window.Resources>
+
+    <extToolkit:BusyIndicator BusyContent="{Binding Path=(common:BusyStatus.Content)}" IsBusy="{Binding Path=(common:BusyStatus.IsBusy)}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36" />
+                <RowDefinition />
+                <RowDefinition Height="24" />
+            </Grid.RowDefinitions>
+
+            <ToolBarTray Height="36" Grid.Row="0" VerticalAlignment="Top" >
+                <ToolBar Height="36" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  >
+                    <Button ToolTip="{x:Static res:Resources.View}" Command="{Binding ViewItemDetailsCommand}">
+                        <Path Stretch="Uniform" Fill="#FF000000"  Data="{DynamicResource UserIcon}" />
+                    </Button>
+                    <Button ToolTip="{x:Static res:Resources.Create}" Command="{Binding CreateItemCommand}">
+                        <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserAddIcon}"/>
+                    </Button>
+                    <Button ToolTip="{x:Static res:Resources.Delete}" Command="{Binding RemoveItemCommand}">
+                        <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserDeleteIcon}"/>
+                    </Button>
+                    <Separator />
+                    <TextBlock Text="{x:Static res:Resources.Filter}" Margin="0,7,0,4" ></TextBlock>
+                    <TextBox Width="150" Margin="0,5,0,4"></TextBox>
+                </ToolBar>
+            </ToolBarTray>
+
+            <ListView SelectedItem="{Binding SelectedItem}" 
+                SelectionMode="Single" 
+                Name="EmployeeList" 
+                Grid.Row="1" 
+                VerticalAlignment="Stretch" 
+                HorizontalAlignment="Stretch" 
+                ItemsSource="{Binding Items}">
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding ViewItemDetailsCommand, Mode=OneWay}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="{x:Static res:Resources.LastName}" Width="100" DisplayMemberBinding="{Binding LastName}"/>
+                        <GridViewColumn Header="{x:Static res:Resources.FirstName}" Width="100" DisplayMemberBinding="{Binding FirstName}" />
+                        <GridViewColumn Header="{x:Static res:Resources.MiddleName}" Width="100" DisplayMemberBinding="{Binding MiddleName}" />
+                        <GridViewColumn Header="{x:Static res:Resources.Department}" Width="100" DisplayMemberBinding="{Binding Department}" />
+                        <GridViewColumn Header="{x:Static res:Resources.Email}" Width="100" DisplayMemberBinding="{Binding Email}" />
+                        <GridViewColumn Header="{x:Static res:Resources.PhoneNumber}" Width="100" DisplayMemberBinding="{Binding PhoneNumber}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <StatusBar Grid.Row="2" VerticalAlignment="Stretch" >
+                <TextBlock Name="StatusText" Text="{Binding StatusText}"></TextBlock>
+            </StatusBar>
+        </Grid>
+    </extToolkit:BusyIndicator>
+</Window>

@@ -72,7 +72,7 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
@@ -95,6 +95,9 @@
     </Reference>
     <Reference Include="Microsoft.EntityFrameworkCore.Sqlite, Version=2.2.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.EntityFrameworkCore.Sqlite.Core.2.2.2\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Interaction.3.0.40218.0\lib\net46\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
@@ -196,6 +199,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Interaction.3.0.40218.0\lib\net46\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -229,45 +235,116 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ApplicationContext.cs" />
+    <Compile Include="Data\DatabaseContext.cs" />
+    <Compile Include="Data\ApplicationContext.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Data\DocumentContext.cs" />
     <Compile Include="Converters\EnumDescriptionTypeConverter.cs" />
-    <Compile Include="EmployeeContext.cs" />
-    <Compile Include="EnumBindingSourceExtension.cs" />
-    <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Gender.cs" />
-    <Compile Include="PropertyChangeNotification.cs" />
-    <Compile Include="Services\EmployeeDataService.cs" />
-    <Compile Include="Services\IEmployeeDataService.cs" />
-    <Compile Include="Services\IocConfiguration.cs" />
-    <Compile Include="Services\IocKernel.cs" />
-    <Compile Include="ViewModel\BaseEmployeeViewModel.cs" />
-    <Compile Include="ViewModel\SingleEmployeeViewModel.cs" />
-    <Compile Include="BusyStatus.cs" />
-    <Compile Include="ViewModel\ListEmployeeViewModel.cs" />
+    <Compile Include="Data\CompanyContext.cs" />
+    <Compile Include="Data\EmployeeContext.cs" />
+    <Compile Include="Common\EnumBindingSourceExtension.cs" />
+    <Compile Include="Entities\Attachment.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Checkout.cs" />
+    <Compile Include="Entities\Counter.cs" />
+    <Compile Include="Entities\Document.cs" />
+    <Compile Include="Entities\Execution.cs" />
+    <Compile Include="Entities\IncomingDocument.cs" />
+    <Compile Include="Entities\InternalDocument.cs" />
+    <Compile Include="Entities\NamedEntity.cs" />
+    <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\Gender.cs" />
+    <Compile Include="Entities\Company.cs" />
+    <Compile Include="Common\Utils.cs" />
+    <Compile Include="Entities\OutgoingDocument.cs" />
+    <Compile Include="Entities\Resolution.cs" />
+    <Compile Include="ViewModel\Company\CompanyListViewModel.cs" />
+    <Compile Include="ViewModel\Company\CompanyDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Document\Outgoing\OutgoingDocListViewModel.cs" />
+    <Compile Include="ViewModel\Document\Internal\InternalDocListViewModel.cs" />
+    <Compile Include="ViewModel\Document\Incoming\IncomingDocListViewModel.cs" />
+    <Compile Include="ViewModel\Document\DocumentViewModel.cs" />
+    <Compile Include="ViewModel\Document\Internal\InternalDocDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Document\Outgoing\OutgoingDocDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Document\Incoming\IncomingDocDetailsViewModel.cs" />
+    <Compile Include="ViewModel\ItemListViewModel.cs" />
+    <Compile Include="ViewModel\ItemDetailsViewModel.cs" />
+    <Compile Include="Common\PropertyChangeNotification.cs" />
+    <Compile Include="Ioc\IocConfiguration.cs" />
+    <Compile Include="Ioc\IocKernel.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Employee\EmployeeDetailsViewModel.cs" />
+    <Compile Include="Common\BusyStatus.cs" />
+    <Compile Include="ViewModel\Employee\EmployeeListViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Views\EmployeeListWindow.xaml.cs">
+    <Compile Include="Views\Company\CompanyListControl.xaml.cs">
+      <DependentUpon>CompanyListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\CompanyDetailsWindow.xaml.cs">
+      <DependentUpon>CompanyDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Company\CompanyListWindow.xaml.cs">
+      <DependentUpon>CompanyListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Document\Incoming\IncomingDocDetailsWnd.xaml.cs">
+      <DependentUpon>IncomingDocDetailsWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Document\Internal\InternalDocDetailsWnd.xaml.cs">
+      <DependentUpon>InternalDocDetailsWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Document\Outgoing\OutgoingDocDetailsWnd.xaml.cs">
+      <DependentUpon>OutgoingDocDetailsWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmployeeListWindow.xaml.cs">
       <DependentUpon>EmployeeListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Views\Document\DocumentListWnd.xaml.cs">
+      <DependentUpon>DocumentListWnd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmployeeCardWindow.xaml.cs">
-      <DependentUpon>EmployeeCardWindow.xaml</DependentUpon>
+    <Compile Include="Views\Employee\EmployeeDetailsWindow.xaml.cs">
+      <DependentUpon>EmployeeDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\EmployeeListWindow.xaml">
+    <Page Include="Properties\IconDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainWindow.xaml">
+    <Page Include="Views\Company\CompanyListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Company\CompanyDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Company\CompanyListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Document\Incoming\IncomingDocDetailsWnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Document\Internal\InternalDocDetailsWnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Document\Outgoing\OutgoingDocDetailsWnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Employee\EmployeeListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeeCardWindow.xaml">
+    <Page Include="Views\Document\DocumentListWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employee\EmployeeDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
