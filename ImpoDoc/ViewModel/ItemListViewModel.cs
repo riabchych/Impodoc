@@ -1,6 +1,6 @@
 ﻿using ImpoDoc.Commands;
-using ImpoDoc.Ioc;
 using ImpoDoc.Data;
+using ImpoDoc.Ioc;
 using System.Collections.ObjectModel;
 
 namespace ImpoDoc.ViewModel
@@ -49,24 +49,8 @@ namespace ImpoDoc.ViewModel
             }
         }
 
-        private RelayCommand<object> removeItemCommand;
-        public RelayCommand<object> RemoveItemCommand
-        {
-            get
-            {
-                return removeItemCommand ??
-                  (removeItemCommand = new RelayCommand<object>(obj =>
-                  {
-                      if (SelectedItem == null)
-                      {
-                          return;
-                      }
-
-                      //GenericRepository.Remove(SelectedItem);
-                      _ = Items.Remove(SelectedItem);
-                  }, IsItemSelected));
-            }
-        }
+        public virtual RelayCommand<object> RemoveItemCommand { get => removeItemCommand;}
+        protected RelayCommand<object> removeItemCommand;
 
         public void Clear(object parameter)
         {
