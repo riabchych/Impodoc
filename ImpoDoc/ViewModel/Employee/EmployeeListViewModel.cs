@@ -1,4 +1,5 @@
-﻿using ImpoDoc.Common;
+﻿using ImpoDoc.Commands;
+using ImpoDoc.Common;
 using ImpoDoc.Data;
 using ImpoDoc.Entities;
 using ImpoDoc.Ioc;
@@ -26,7 +27,41 @@ namespace ImpoDoc.ViewModel
             }
         }
 
-        protected override async void ViewItemDetailsAsync(bool isNew = false)
+        public override RelayCommand<object> RemoveItemCommand
+        {
+            get
+            {
+                return removeItemCommand ??
+                  (removeItemCommand = new RelayCommand<object>(obj =>
+                  {
+                      if (SelectedItem == null)
+                      {
+                          return;
+                      }
+
+                      using (var context = new DatabaseContext())
+                      {
+                          using (var transaction = context.Database.BeginTransaction())
+                          {
+                              try
+                              {
+                                  context.Employees.Remove(SelectedItem);
+                                  context.SaveChanges();
+                                  _ = Items.Remove(SelectedItem);
+                                  transaction.Commit();
+                              }
+                              catch
+                              {
+                                  transaction.Rollback();
+                              }
+                          }
+
+                      }
+                  }, IsItemSelected));
+            }
+        }
+
+        protected override void ViewItemDetailsAsync(bool isNew = false)
         {
             ItemDetailsVM.ActiveItem = isNew || SelectedItem is null ? new Employee() : Utils.CloneObject(SelectedItem);
 
@@ -41,13 +76,12 @@ namespace ImpoDoc.ViewModel
                             if (isNew)
                             {
                                 context.Employees.Add(ItemDetailsVM.ActiveItem);
-                                await context.SaveChangesAsync();
+                                context.SaveChanges();
                                 Items.Add(ItemDetailsVM.ActiveItem);
                             }
                             else
                             {
-                                context.Employees.Update(ItemDetailsVM.ActiveItem);
-                                await context.SaveChangesAsync();
+                                context.SaveChanges();
                                 int index = Items.IndexOf(SelectedItem);
 
                                 if (index >= 0 && Items.Count > index)

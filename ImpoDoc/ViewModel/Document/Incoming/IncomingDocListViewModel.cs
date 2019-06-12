@@ -1,4 +1,5 @@
-﻿using ImpoDoc.Common;
+﻿using ImpoDoc.Commands;
+using ImpoDoc.Common;
 using ImpoDoc.Data;
 using ImpoDoc.Entities;
 using ImpoDoc.Ioc;
@@ -27,14 +28,56 @@ namespace ImpoDoc.ViewModel
                         .Include(document => document.Checkout)
                         .Include(document => document.Counter)
                         .Include(document => document.Correspondent)
-                        .Include(document => document.Execution)
                         .Include(document => document.Resolution)
+                        .Include(document => document.Execution)
+                            .ThenInclude(execution => execution.Executor)
                         .ToListAsync());
                     Items = new ObservableCollection<IncomingDocument>(result);
                 }
             }
         }
-        protected override async void ViewItemDetailsAsync(bool isNew = false)
+
+        public override RelayCommand<object> RemoveItemCommand
+        {
+            get
+            {
+                return removeItemCommand ??
+                  (removeItemCommand = new RelayCommand<object>(obj =>
+                  {
+                      if (SelectedItem == null)
+                      {
+                          return;
+                      }
+
+                      using (var context = new DatabaseContext())
+                      {
+                          using (var transaction = context.Database.BeginTransaction())
+                          {
+                              try
+                              {
+                                  context.Entry(SelectedItem.Correspondent).State = EntityState.Detached;
+                                  context.Entry(SelectedItem.Execution.Executor).State = EntityState.Detached;
+                                  context.Remove(SelectedItem.Attachment);
+                                  context.Remove(SelectedItem.Counter);
+                                  context.Remove(SelectedItem.Checkout);
+                                  context.Remove(SelectedItem.Execution);
+                                  context.Remove(SelectedItem.Resolution);
+                                  context.IncomingDocuments.Remove(SelectedItem);
+                                  context.SaveChanges();
+                                  _ = Items.Remove(SelectedItem);
+                                  transaction.Commit();
+                              }
+                              catch
+                              {
+                                  transaction.Rollback();
+                              }
+                          }
+                      }
+                  }, IsItemSelected));
+            }
+        }
+
+        protected override void ViewItemDetailsAsync(bool isNew = false)
         {
             ItemDetailsVM.ActiveItem = isNew || SelectedItem is null ? new IncomingDocument() : Utils.CloneObject(SelectedItem);
             bool? dialogOpenResult = ItemDetailsWnd.ShowDialog();
@@ -52,25 +95,15 @@ namespace ImpoDoc.ViewModel
                     {
                         ItemDetailsVM.ActiveItem.CorrespondentId = ItemDetailsVM.ActiveItem.Correspondent.Id;
                         ItemDetailsVM.ActiveItem.Execution.ExecutorId = ItemDetailsVM.ActiveItem.Execution.Executor.Id;
-                        Company correspondent = ItemDetailsVM.ActiveItem.Correspondent;
-                        Employee executor = ItemDetailsVM.ActiveItem.Execution.Executor;
-                        ItemDetailsVM.ActiveItem.Correspondent = null;
-                        ItemDetailsVM.ActiveItem.Execution.Executor = null;
+                        context.IncomingDocuments.Attach(ItemDetailsVM.ActiveItem);
+                        context.SaveChanges();
 
                         if (isNew)
                         {
-                            context.IncomingDocuments.Add(ItemDetailsVM.ActiveItem);
-                            await context.SaveChangesAsync();
-                            ItemDetailsVM.ActiveItem.Correspondent = correspondent;
-                            ItemDetailsVM.ActiveItem.Execution.Executor = executor;
                             Items.Add(ItemDetailsVM.ActiveItem);
                         }
                         else
                         {
-                            context.IncomingDocuments.Update(ItemDetailsVM.ActiveItem);
-                            await context.SaveChangesAsync();
-                            ItemDetailsVM.ActiveItem.Correspondent = correspondent;
-                            ItemDetailsVM.ActiveItem.Execution.Executor = executor;
                             int index = Items.IndexOf(SelectedItem);
 
                             if (index >= 0 && Items.Count > index)
