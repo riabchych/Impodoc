@@ -3,7 +3,6 @@ using ImpoDoc.Data;
 using ImpoDoc.Ioc;
 using ImpoDoc.ViewModel;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -23,20 +22,12 @@ namespace ImpoDoc
 
         public async Task LoadContentAsync()
         {
-            using (DatabaseContext context = new DatabaseContext())
-            {
-                // context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-                context.Database.Migrate();
-            }
-
             BusyStatus.IsBusy = true;
             await IocKernel.Get<EmployeeListViewModel>().LoadDataAsync();
             await IocKernel.Get<CompanyListViewModel>().LoadDataAsync();
             await IocKernel.Get<IncomingDocListViewModel>().LoadDataAsync();
             await IocKernel.Get<OutgoingDocListViewModel>().LoadDataAsync();
             await IocKernel.Get<InternalDocListViewModel>().LoadDataAsync();
-
             BusyStatus.IsBusy = false;
         }
     }
