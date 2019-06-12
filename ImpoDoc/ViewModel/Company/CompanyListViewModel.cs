@@ -1,4 +1,5 @@
-﻿using ImpoDoc.Common;
+﻿using ImpoDoc.Commands;
+using ImpoDoc.Common;
 using ImpoDoc.Data;
 using ImpoDoc.Entities;
 using ImpoDoc.Ioc;
@@ -23,6 +24,40 @@ namespace ImpoDoc.ViewModel
             {
                 List<Company> result = await Task.Run(() => context.Companies.ToListAsync());
                 Items = new ObservableCollection<Company>(result);
+            }
+        }
+
+        public override RelayCommand<object> RemoveItemCommand
+        {
+            get
+            {
+                return removeItemCommand ??
+                  (removeItemCommand = new RelayCommand<object>(obj =>
+                  {
+                      if (SelectedItem == null)
+                      {
+                          return;
+                      }
+
+                      using (var context = new DatabaseContext())
+                      {
+                          using (var transaction = context.Database.BeginTransaction())
+                          {
+                              try
+                              {
+                                  context.Companies.Remove(SelectedItem);
+                                  context.SaveChanges();
+                                  _ = Items.Remove(SelectedItem);
+                                  transaction.Commit();
+                              }
+                              catch
+                              {
+                                  transaction.Rollback();
+                              }
+                          }
+
+                      }
+                  }, IsItemSelected));
             }
         }
 
