@@ -37,7 +37,7 @@ namespace ImpoDoc.ViewModel
 
         private bool CheckAttachment(object arg)
         {
-            return !(ActiveItem.Attachment.Content == null || ActiveItem.Attachment.Filename == null || ActiveItem.Attachment.Path == null);
+            return !(ActiveItem == null || ActiveItem.Attachment == null || ActiveItem.Attachment.Content == null || ActiveItem.Attachment.Filename == null || ActiveItem.Attachment.Path == null);
         }
 
     }
