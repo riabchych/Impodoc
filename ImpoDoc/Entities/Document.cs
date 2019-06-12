@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ImpoDoc.Entities
@@ -60,36 +61,24 @@ namespace ImpoDoc.Entities
             set { SetValue(() => Location, value); }
         }
 
-        public int? AttachmentId { get; set; }
-
-        [ForeignKey("AttachmentId")]
         public Attachment Attachment
         {
             get { return GetValue(() => Attachment); }
             set { SetValue(() => Attachment, value); }
         }
 
-        public int? CheckoutId { get; set; }
-
-        [ForeignKey("CheckoutId")]
         public Checkout Checkout
         {
             get { return GetValue(() => Checkout); }
             set { SetValue(() => Checkout, value); }
         }
 
-        public int? ExecutionId { get; set; }
-
-        [ForeignKey("ExecutionId")]
         public Execution Execution
         {
             get { return GetValue(() => Execution); }
             set { SetValue(() => Execution, value); }
         }
 
-        public int? CounterId { get; set; }
-
-        [ForeignKey("CounterId")]
         public Counter Counter
         {
             get { return GetValue(() => Counter); }

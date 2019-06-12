@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ImpoDoc.Entities
 {
+    [Table("Incoming_docs")]
     public class IncomingDocument : Document
     {
         public IncomingDocument() : base()
@@ -26,9 +27,6 @@ namespace ImpoDoc.Entities
             set { SetValue(() => ReceivedAt, value); }
         }
 
-        public int? ResolutionId { get; set; }
-
-        [ForeignKey("ResolutionId")]
         public Resolution Resolution
         {
             get { return GetValue(() => Resolution); }

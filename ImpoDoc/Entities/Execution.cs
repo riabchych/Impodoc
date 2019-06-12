@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ImpoDoc.Entities
 {
+    [Table("Executions")]
     public class Execution : BaseEntity<Execution>
     {
         public Execution()

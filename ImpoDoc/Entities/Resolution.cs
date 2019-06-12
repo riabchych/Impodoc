@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ImpoDoc.Entities
 {
+    [Table("Resolutions")]
     public class Resolution : BaseEntity<Resolution>
     {
         public string Text

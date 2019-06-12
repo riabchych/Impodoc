@@ -1,10 +1,12 @@
 ﻿using Microsoft.Win32;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Controls;
 
 namespace ImpoDoc.Entities
 {
+    [Table("Attachments")]
     public class Attachment : BaseEntity<Attachment>
     {
         public string Filename
