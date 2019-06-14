@@ -7,11 +7,11 @@ using System.Windows;
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
 [assembly: AssemblyTitle("ImpoDoc")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Автоматизована система обліку документів")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Yevhenii Riabchych")]
 [assembly: AssemblyProduct("ImpoDoc")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright © 2019, Yevhenii Riabchych")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
