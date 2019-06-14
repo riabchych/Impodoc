@@ -131,7 +131,7 @@
                   ItemsSource="{Binding EmployeeListVM.Items, Source={StaticResource Locator}}" 
                   DisplayMemberPath="DisplayName" 
                   SelectedItem="{Binding ActiveItem.Execution.Executor}"
-                  Text="{Binding ActiveItem.Execution.Executor.DisplayName}" />
+                  Text="{Binding ActiveItem.Execution.Executor.DisplayName, Mode=OneWay}" />
 
         <TextBlock Text="{x:Static res:Resources.DocumentCreatedAt}" Grid.Column="4" Grid.Row="0"  />
         <DatePicker Grid.Column="5" Grid.Row="0" SelectedDate="{Binding ActiveItem.CreatedAt}"  />
