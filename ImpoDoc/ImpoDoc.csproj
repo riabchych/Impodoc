@@ -240,6 +240,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\Logger\ILogEvent.cs" />
+    <Compile Include="Common\Logger\ILogWriter.cs" />
+    <Compile Include="Common\Logger\LoggerFactory.cs" />
+    <Compile Include="Common\Logger\Loggers\AbstractLogger.cs" />
+    <Compile Include="Common\Logger\Loggers\ILogger.cs" />
+    <Compile Include="Common\Logger\Loggers\TraceLogger\TraceLogger.cs" />
+    <Compile Include="Common\Logger\Loggers\TraceLogger\Writers\DebugTraceWriter.cs" />
+    <Compile Include="Common\Logger\Loggers\TraceLogger\Writers\ErrorTraceWriter.cs" />
+    <Compile Include="Common\Logger\Loggers\TraceLogger\Writers\InfoTraceWriter.cs" />
+    <Compile Include="Common\Logger\LogType.cs" />
+    <Compile Include="Common\Logger\LogTypes\AbstractLogType.cs" />
+    <Compile Include="Common\Logger\LogTypes\DebugLogType.cs" />
+    <Compile Include="Common\Logger\LogTypes\ErrorLogType.cs" />
+    <Compile Include="Common\Logger\LogTypes\InfoLogType.cs" />
     <Compile Include="Data\DatabaseContext.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\EnumDescriptionTypeConverter.cs" />
@@ -259,6 +273,7 @@
     <Compile Include="Common\Utils.cs" />
     <Compile Include="Entities\OutgoingDocument.cs" />
     <Compile Include="Entities\Resolution.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Migrations\20190611095111_InitialCreate.cs" />
     <Compile Include="Migrations\20190611095111_InitialCreate.designer.cs">
       <DependentUpon>20190611095111_InitialCreate.cs</DependentUpon>
@@ -283,9 +298,6 @@
     <Compile Include="Common\BusyStatus.cs" />
     <Compile Include="ViewModel\Employee\EmployeeListViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Views\Company\CompanyListControl.xaml.cs">
-      <DependentUpon>CompanyListControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Company\CompanyDetailsWindow.xaml.cs">
       <DependentUpon>CompanyDetailsWindow.xaml</DependentUpon>
     </Compile>
@@ -314,13 +326,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Properties\IconDictionary.xaml">
+    <Page Include="Properties\ApplicationDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Company\CompanyListControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Company\CompanyDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -373,6 +381,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="core.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
