@@ -273,7 +273,6 @@
     <Compile Include="Common\Utils.cs" />
     <Compile Include="Entities\OutgoingDocument.cs" />
     <Compile Include="Entities\Resolution.cs" />
-    <Compile Include="Entities\User.cs" />
     <Compile Include="Migrations\20190611095111_InitialCreate.cs" />
     <Compile Include="Migrations\20190611095111_InitialCreate.designer.cs">
       <DependentUpon>20190611095111_InitialCreate.cs</DependentUpon>
