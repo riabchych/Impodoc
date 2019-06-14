@@ -117,124 +117,217 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutApp" xml:space="preserve">
-    <value>Про програму</value>
+  <data name="AddresseeIndex" xml:space="preserve">
+    <value>Індекс адресата</value>
   </data>
-  <data name="ApplyChanges" xml:space="preserve">
-    <value>Внести зміни</value>
+  <data name="AddresserIndex" xml:space="preserve">
+    <value>Індекс адресанта</value>
   </data>
-  <data name="ArchiveAndRecovery" xml:space="preserve">
-    <value>Архівація та відновлення</value>
+  <data name="CheckoutDate" xml:space="preserve">
+    <value>Дата контролю</value>
   </data>
-  <data name="Copy" xml:space="preserve">
-    <value>Копіювати</value>
+  <data name="CompanyDirector" xml:space="preserve">
+    <value>Керівник</value>
   </data>
-  <data name="Create" xml:space="preserve">
-    <value>Створити</value>
-  </data>
-  <data name="Cut" xml:space="preserve">
-    <value>Вирізати</value>
-  </data>
-  <data name="DataAdding" xml:space="preserve">
-    <value>Відбувається додання даних...</value>
-  </data>
-  <data name="DataDeleting" xml:space="preserve">
-    <value>Відбувається видалення даних...</value>
-  </data>
-  <data name="DataLoading" xml:space="preserve">
-    <value>Відбувається завантаження даних. Будь ласка, зачекайте...</value>
-  </data>
-  <data name="DataUpdating" xml:space="preserve">
-    <value>Відбувається оновлення даних...</value>
-  </data>
-  <data name="DateOfBirth" xml:space="preserve">
-    <value>Дата народження</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Видалити</value>
-  </data>
-  <data name="Department" xml:space="preserve">
-    <value>Відділ</value>
-  </data>
-  <data name="Done" xml:space="preserve">
-    <value>Готово</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Редагувати</value>
-  </data>
-  <data name="Email" xml:space="preserve">
+  <data name="CompanyEmail" xml:space="preserve">
     <value>Ел. пошта</value>
   </data>
-  <data name="EmployeeCardTitle" xml:space="preserve">
-    <value>Карточка працівника</value>
+  <data name="CompanyInfoTitle" xml:space="preserve">
+    <value>Інформація про підприємство</value>
+  </data>
+  <data name="CompanyInn" xml:space="preserve">
+    <value>ЄДРПОУ</value>
+  </data>
+  <data name="CompanyLegalAddress" xml:space="preserve">
+    <value>Адреса</value>
+  </data>
+  <data name="CompanyListTitle" xml:space="preserve">
+    <value>Список організацій</value>
+  </data>
+  <data name="CompanyLocation" xml:space="preserve">
+    <value>Місто</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Назва</value>
+  </data>
+  <data name="CompanyPhone" xml:space="preserve">
+    <value>Номер телефону</value>
+  </data>
+  <data name="Correspondent" xml:space="preserve">
+    <value>Кореспондент</value>
+  </data>
+  <data name="CounterCopy" xml:space="preserve">
+    <value>Кількість екземплярів</value>
+  </data>
+  <data name="CounterSheets" xml:space="preserve">
+    <value>Кількість аркушів</value>
+  </data>
+  <data name="CreateButtonTooltip" xml:space="preserve">
+    <value>Додати новий елемент</value>
+  </data>
+  <data name="DocumentAddressee" xml:space="preserve">
+    <value>Адресат</value>
+  </data>
+  <data name="DocumentAddresser" xml:space="preserve">
+    <value>Адресант</value>
+  </data>
+  <data name="DocumentCheckout" xml:space="preserve">
+    <value>На контроль</value>
+  </data>
+  <data name="DocumentCreatedAt" xml:space="preserve">
+    <value>Дата документа</value>
+  </data>
+  <data name="DocumentDescription" xml:space="preserve">
+    <value>Короткий зміст</value>
+  </data>
+  <data name="DocumentExecutor" xml:space="preserve">
+    <value>Виконавець</value>
+  </data>
+  <data name="DocumentFile" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="DocumentIncomingIndex" xml:space="preserve">
+    <value>Індекс кореспондента</value>
+  </data>
+  <data name="DocumentListTitle" xml:space="preserve">
+    <value>Список документів</value>
+  </data>
+  <data name="DocumentLocation" xml:space="preserve">
+    <value>Місцезнаходження</value>
+  </data>
+  <data name="DocumentMedia" xml:space="preserve">
+    <value>Носій</value>
+  </data>
+  <data name="DocumentName" xml:space="preserve">
+    <value>Назва докумену</value>
+  </data>
+  <data name="DocumentOutgoingIndex" xml:space="preserve">
+    <value>Індекс документа</value>
+  </data>
+  <data name="DocumentReceivedAt" xml:space="preserve">
+    <value>Дата надходження</value>
+  </data>
+  <data name="DocumentSentAt" xml:space="preserve">
+    <value>Дата відправлення</value>
+  </data>
+  <data name="DocumentType" xml:space="preserve">
+    <value>Тип документа</value>
+  </data>
+  <data name="EmployeeDateOfBirth" xml:space="preserve">
+    <value>Дата народження</value>
+  </data>
+  <data name="EmployeeDepartment" xml:space="preserve">
+    <value>Відділ</value>
+  </data>
+  <data name="EmployeeEmail" xml:space="preserve">
+    <value>Ел. пошта</value>
+  </data>
+  <data name="EmployeeFirstName" xml:space="preserve">
+    <value>Ім'я</value>
+  </data>
+  <data name="EmployeeGender" xml:space="preserve">
+    <value>Стать</value>
+  </data>
+  <data name="EmployeeInfoTitle" xml:space="preserve">
+    <value>Картка працівника</value>
+  </data>
+  <data name="EmployeeLastName" xml:space="preserve">
+    <value>Прізвище</value>
   </data>
   <data name="EmployeeListTitle" xml:space="preserve">
     <value>Список працівників</value>
   </data>
-  <data name="Employees" xml:space="preserve">
-    <value>Працівники</value>
-  </data>
-  <data name="Exit" xml:space="preserve">
-    <value>Вихід</value>
-  </data>
-  <data name="Export" xml:space="preserve">
-    <value>Експорт</value>
-  </data>
-  <data name="FemaleGender" xml:space="preserve">
-    <value>Жіноча</value>
-  </data>
-  <data name="File" xml:space="preserve">
-    <value>Файл</value>
-  </data>
-  <data name="Filter" xml:space="preserve">
-    <value>Фільтр</value>
-  </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>Ім'я</value>
-  </data>
-  <data name="Gender" xml:space="preserve">
-    <value>Стать</value>
-  </data>
-  <data name="Help" xml:space="preserve">
-    <value>Допомога</value>
-  </data>
-  <data name="Import" xml:space="preserve">
-    <value>Імпорт</value>
-  </data>
-  <data name="Insert" xml:space="preserve">
-    <value>Вставити</value>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>Фамилия</value>
-  </data>
-  <data name="Maintenance" xml:space="preserve">
-    <value>Обслуговування</value>
-  </data>
-  <data name="MaleGender" xml:space="preserve">
-    <value>Чоловіча</value>
-  </data>
-  <data name="MiddleName" xml:space="preserve">
+  <data name="EmployeeMiddleName" xml:space="preserve">
     <value>По батькові</value>
   </data>
-  <data name="Open" xml:space="preserve">
-    <value>Відкрити</value>
-  </data>
-  <data name="PhoneNumber" xml:space="preserve">
+  <data name="EmployeePhoneNumber" xml:space="preserve">
     <value>Номер телефону</value>
   </data>
-  <data name="Save" xml:space="preserve">
+  <data name="ExecutionCompletedAt" xml:space="preserve">
+    <value>Дата виконання</value>
+  </data>
+  <data name="ExecutionCreatedAt" xml:space="preserve">
+    <value>Дата отримання</value>
+  </data>
+  <data name="ExecutionResult" xml:space="preserve">
+    <value>Відмітка про виконання</value>
+  </data>
+  <data name="FilterLabel" xml:space="preserve">
+    <value>Фільтр</value>
+  </data>
+  <data name="FilterPlaceholderText" xml:space="preserve">
+    <value>Введіть значення...</value>
+  </data>
+  <data name="IncomingListTitle" xml:space="preserve">
+    <value>Вхідний документ</value>
+  </data>
+  <data name="InternalListTitle" xml:space="preserve">
+    <value>Внутрішній документ</value>
+  </data>
+  <data name="MenuItemAbout" xml:space="preserve">
+    <value>Про програму</value>
+  </data>
+  <data name="MenuItemChange" xml:space="preserve">
+    <value>Редагувати</value>
+  </data>
+  <data name="MenuItemCompanies" xml:space="preserve">
+    <value>Організації</value>
+  </data>
+  <data name="MenuItemCreate" xml:space="preserve">
+    <value>Створити</value>
+  </data>
+  <data name="MenuItemDelete" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+  <data name="MenuItemDirectories" xml:space="preserve">
+    <value>Довідники</value>
+  </data>
+  <data name="MenuItemDocument" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="MenuItemEdit" xml:space="preserve">
+    <value>Правка</value>
+  </data>
+  <data name="MenuItemEmployees" xml:space="preserve">
+    <value>Працівники</value>
+  </data>
+  <data name="MenuItemExit" xml:space="preserve">
+    <value>Вийти</value>
+  </data>
+  <data name="MenuItemHelp" xml:space="preserve">
+    <value>Допомога</value>
+  </data>
+  <data name="OpenAttachmentButton" xml:space="preserve">
+    <value>Відкрити додаток</value>
+  </data>
+  <data name="OutgoingListTitle" xml:space="preserve">
+    <value>Вихідний документ</value>
+  </data>
+  <data name="PrintAttachmentButton" xml:space="preserve">
+    <value>Друкувати додаток</value>
+  </data>
+  <data name="RemoveButtonTooltip" xml:space="preserve">
+    <value>Видалити елемент</value>
+  </data>
+  <data name="Resolution" xml:space="preserve">
+    <value>Резолюція</value>
+  </data>
+  <data name="ResolutionCreatedAt" xml:space="preserve">
+    <value>Дата резолюції</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
     <value>Зберегти</value>
   </data>
-  <data name="Service" xml:space="preserve">
-    <value>Сервіс</value>
+  <data name="TabItemIncomingDocuments" xml:space="preserve">
+    <value>Вхідні</value>
   </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Налаштування</value>
+  <data name="TabItemInternalDocuments" xml:space="preserve">
+    <value>Внутрішні</value>
   </data>
-  <data name="ShowInfo" xml:space="preserve">
-    <value>Переглянути довідку</value>
+  <data name="TabItemOutgoingDocuments" xml:space="preserve">
+    <value>Вихідні</value>
   </data>
-  <data name="View" xml:space="preserve">
-    <value>Переглянути</value>
+  <data name="ViewButtonTooltip" xml:space="preserve">
+    <value>Переглянути інформацію</value>
   </data>
 </root>

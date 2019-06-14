@@ -61,155 +61,353 @@ namespace ImpoDoc.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Про програму.
+        ///   Ищет локализованную строку, похожую на Індекс адресата.
         /// </summary>
-        public static string AboutApp {
+        public static string AddresseeIndex {
             get {
-                return ResourceManager.GetString("AboutApp", resourceCulture);
+                return ResourceManager.GetString("AddresseeIndex", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Внести зміни.
+        ///   Ищет локализованную строку, похожую на Індекс адресанта.
         /// </summary>
-        public static string ApplyChanges {
+        public static string AddresserIndex {
             get {
-                return ResourceManager.GetString("ApplyChanges", resourceCulture);
+                return ResourceManager.GetString("AddresserIndex", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Архівація та відновлення.
+        ///   Ищет локализованную строку, похожую на Дата контролю.
         /// </summary>
-        public static string ArchiveAndRecovery {
+        public static string CheckoutDate {
             get {
-                return ResourceManager.GetString("ArchiveAndRecovery", resourceCulture);
+                return ResourceManager.GetString("CheckoutDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Копіювати.
+        ///   Ищет локализованную строку, похожую на Керівник.
         /// </summary>
-        public static string Copy {
+        public static string CompanyDirector {
             get {
-                return ResourceManager.GetString("Copy", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Створити.
-        /// </summary>
-        public static string Create {
-            get {
-                return ResourceManager.GetString("Create", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Вирізати.
-        /// </summary>
-        public static string Cut {
-            get {
-                return ResourceManager.GetString("Cut", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Відбувається додання даних....
-        /// </summary>
-        public static string DataAdding {
-            get {
-                return ResourceManager.GetString("DataAdding", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Відбувається видалення даних....
-        /// </summary>
-        public static string DataDeleting {
-            get {
-                return ResourceManager.GetString("DataDeleting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Відбувається завантаження даних. Будь ласка, зачекайте....
-        /// </summary>
-        public static string DataLoading {
-            get {
-                return ResourceManager.GetString("DataLoading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Відбувається оновлення даних....
-        /// </summary>
-        public static string DataUpdating {
-            get {
-                return ResourceManager.GetString("DataUpdating", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Дата народження.
-        /// </summary>
-        public static string DateOfBirth {
-            get {
-                return ResourceManager.GetString("DateOfBirth", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Видалити.
-        /// </summary>
-        public static string Delete {
-            get {
-                return ResourceManager.GetString("Delete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Відділ.
-        /// </summary>
-        public static string Department {
-            get {
-                return ResourceManager.GetString("Department", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Готово.
-        /// </summary>
-        public static string Done {
-            get {
-                return ResourceManager.GetString("Done", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Редагувати.
-        /// </summary>
-        public static string Edit {
-            get {
-                return ResourceManager.GetString("Edit", resourceCulture);
+                return ResourceManager.GetString("CompanyDirector", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Ел. пошта.
         /// </summary>
-        public static string Email {
+        public static string CompanyEmail {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("CompanyEmail", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Карточка працівника.
+        ///   Ищет локализованную строку, похожую на Інформація про підприємство.
         /// </summary>
-        public static string EmployeeCardTitle {
+        public static string CompanyInfoTitle {
             get {
-                return ResourceManager.GetString("EmployeeCardTitle", resourceCulture);
+                return ResourceManager.GetString("CompanyInfoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ЄДРПОУ.
+        /// </summary>
+        public static string CompanyInn {
+            get {
+                return ResourceManager.GetString("CompanyInn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Адреса.
+        /// </summary>
+        public static string CompanyLegalAddress {
+            get {
+                return ResourceManager.GetString("CompanyLegalAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Список організацій.
+        /// </summary>
+        public static string CompanyListTitle {
+            get {
+                return ResourceManager.GetString("CompanyListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Місто.
+        /// </summary>
+        public static string CompanyLocation {
+            get {
+                return ResourceManager.GetString("CompanyLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Назва.
+        /// </summary>
+        public static string CompanyName {
+            get {
+                return ResourceManager.GetString("CompanyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Номер телефону.
+        /// </summary>
+        public static string CompanyPhone {
+            get {
+                return ResourceManager.GetString("CompanyPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Кореспондент.
+        /// </summary>
+        public static string Correspondent {
+            get {
+                return ResourceManager.GetString("Correspondent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Кількість екземплярів.
+        /// </summary>
+        public static string CounterCopy {
+            get {
+                return ResourceManager.GetString("CounterCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Кількість аркушів.
+        /// </summary>
+        public static string CounterSheets {
+            get {
+                return ResourceManager.GetString("CounterSheets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Додати новий елемент.
+        /// </summary>
+        public static string CreateButtonTooltip {
+            get {
+                return ResourceManager.GetString("CreateButtonTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Адресат.
+        /// </summary>
+        public static string DocumentAddressee {
+            get {
+                return ResourceManager.GetString("DocumentAddressee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Адресант.
+        /// </summary>
+        public static string DocumentAddresser {
+            get {
+                return ResourceManager.GetString("DocumentAddresser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на На контроль.
+        /// </summary>
+        public static string DocumentCheckout {
+            get {
+                return ResourceManager.GetString("DocumentCheckout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата документа.
+        /// </summary>
+        public static string DocumentCreatedAt {
+            get {
+                return ResourceManager.GetString("DocumentCreatedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Короткий зміст.
+        /// </summary>
+        public static string DocumentDescription {
+            get {
+                return ResourceManager.GetString("DocumentDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконавець.
+        /// </summary>
+        public static string DocumentExecutor {
+            get {
+                return ResourceManager.GetString("DocumentExecutor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Файл.
+        /// </summary>
+        public static string DocumentFile {
+            get {
+                return ResourceManager.GetString("DocumentFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Індекс кореспондента.
+        /// </summary>
+        public static string DocumentIncomingIndex {
+            get {
+                return ResourceManager.GetString("DocumentIncomingIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Список документів.
+        /// </summary>
+        public static string DocumentListTitle {
+            get {
+                return ResourceManager.GetString("DocumentListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Місцезнаходження.
+        /// </summary>
+        public static string DocumentLocation {
+            get {
+                return ResourceManager.GetString("DocumentLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Носій.
+        /// </summary>
+        public static string DocumentMedia {
+            get {
+                return ResourceManager.GetString("DocumentMedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Назва докумену.
+        /// </summary>
+        public static string DocumentName {
+            get {
+                return ResourceManager.GetString("DocumentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Індекс документа.
+        /// </summary>
+        public static string DocumentOutgoingIndex {
+            get {
+                return ResourceManager.GetString("DocumentOutgoingIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата надходження.
+        /// </summary>
+        public static string DocumentReceivedAt {
+            get {
+                return ResourceManager.GetString("DocumentReceivedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата відправлення.
+        /// </summary>
+        public static string DocumentSentAt {
+            get {
+                return ResourceManager.GetString("DocumentSentAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Тип документа.
+        /// </summary>
+        public static string DocumentType {
+            get {
+                return ResourceManager.GetString("DocumentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата народження.
+        /// </summary>
+        public static string EmployeeDateOfBirth {
+            get {
+                return ResourceManager.GetString("EmployeeDateOfBirth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Відділ.
+        /// </summary>
+        public static string EmployeeDepartment {
+            get {
+                return ResourceManager.GetString("EmployeeDepartment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ел. пошта.
+        /// </summary>
+        public static string EmployeeEmail {
+            get {
+                return ResourceManager.GetString("EmployeeEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ім&apos;я.
+        /// </summary>
+        public static string EmployeeFirstName {
+            get {
+                return ResourceManager.GetString("EmployeeFirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Стать.
+        /// </summary>
+        public static string EmployeeGender {
+            get {
+                return ResourceManager.GetString("EmployeeGender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Картка працівника.
+        /// </summary>
+        public static string EmployeeInfoTitle {
+            get {
+                return ResourceManager.GetString("EmployeeInfoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Прізвище.
+        /// </summary>
+        public static string EmployeeLastName {
+            get {
+                return ResourceManager.GetString("EmployeeLastName", resourceCulture);
             }
         }
         
@@ -223,200 +421,281 @@ namespace ImpoDoc.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Працівники.
-        /// </summary>
-        public static string Employees {
-            get {
-                return ResourceManager.GetString("Employees", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Вихід.
-        /// </summary>
-        public static string Exit {
-            get {
-                return ResourceManager.GetString("Exit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Експорт.
-        /// </summary>
-        public static string Export {
-            get {
-                return ResourceManager.GetString("Export", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Жіноча.
-        /// </summary>
-        public static string FemaleGender {
-            get {
-                return ResourceManager.GetString("FemaleGender", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Файл.
-        /// </summary>
-        public static string File {
-            get {
-                return ResourceManager.GetString("File", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Фільтр.
-        /// </summary>
-        public static string Filter {
-            get {
-                return ResourceManager.GetString("Filter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Ім&apos;я.
-        /// </summary>
-        public static string FirstName {
-            get {
-                return ResourceManager.GetString("FirstName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Стать.
-        /// </summary>
-        public static string Gender {
-            get {
-                return ResourceManager.GetString("Gender", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Допомога.
-        /// </summary>
-        public static string Help {
-            get {
-                return ResourceManager.GetString("Help", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Імпорт.
-        /// </summary>
-        public static string Import {
-            get {
-                return ResourceManager.GetString("Import", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Вставити.
-        /// </summary>
-        public static string Insert {
-            get {
-                return ResourceManager.GetString("Insert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Фамилия.
-        /// </summary>
-        public static string LastName {
-            get {
-                return ResourceManager.GetString("LastName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Обслуговування.
-        /// </summary>
-        public static string Maintenance {
-            get {
-                return ResourceManager.GetString("Maintenance", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Чоловіча.
-        /// </summary>
-        public static string MaleGender {
-            get {
-                return ResourceManager.GetString("MaleGender", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на По батькові.
         /// </summary>
-        public static string MiddleName {
+        public static string EmployeeMiddleName {
             get {
-                return ResourceManager.GetString("MiddleName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Відкрити.
-        /// </summary>
-        public static string Open {
-            get {
-                return ResourceManager.GetString("Open", resourceCulture);
+                return ResourceManager.GetString("EmployeeMiddleName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Номер телефону.
         /// </summary>
-        public static string PhoneNumber {
+        public static string EmployeePhoneNumber {
             get {
-                return ResourceManager.GetString("PhoneNumber", resourceCulture);
+                return ResourceManager.GetString("EmployeePhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата виконання.
+        /// </summary>
+        public static string ExecutionCompletedAt {
+            get {
+                return ResourceManager.GetString("ExecutionCompletedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата отримання.
+        /// </summary>
+        public static string ExecutionCreatedAt {
+            get {
+                return ResourceManager.GetString("ExecutionCreatedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Відмітка про виконання.
+        /// </summary>
+        public static string ExecutionResult {
+            get {
+                return ResourceManager.GetString("ExecutionResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Фільтр.
+        /// </summary>
+        public static string FilterLabel {
+            get {
+                return ResourceManager.GetString("FilterLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Введіть значення....
+        /// </summary>
+        public static string FilterPlaceholderText {
+            get {
+                return ResourceManager.GetString("FilterPlaceholderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вхідний документ.
+        /// </summary>
+        public static string IncomingListTitle {
+            get {
+                return ResourceManager.GetString("IncomingListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Внутрішній документ.
+        /// </summary>
+        public static string InternalListTitle {
+            get {
+                return ResourceManager.GetString("InternalListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Про програму.
+        /// </summary>
+        public static string MenuItemAbout {
+            get {
+                return ResourceManager.GetString("MenuItemAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Редагувати.
+        /// </summary>
+        public static string MenuItemChange {
+            get {
+                return ResourceManager.GetString("MenuItemChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Організації.
+        /// </summary>
+        public static string MenuItemCompanies {
+            get {
+                return ResourceManager.GetString("MenuItemCompanies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Створити.
+        /// </summary>
+        public static string MenuItemCreate {
+            get {
+                return ResourceManager.GetString("MenuItemCreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Видалити.
+        /// </summary>
+        public static string MenuItemDelete {
+            get {
+                return ResourceManager.GetString("MenuItemDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Довідники.
+        /// </summary>
+        public static string MenuItemDirectories {
+            get {
+                return ResourceManager.GetString("MenuItemDirectories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Документ.
+        /// </summary>
+        public static string MenuItemDocument {
+            get {
+                return ResourceManager.GetString("MenuItemDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Правка.
+        /// </summary>
+        public static string MenuItemEdit {
+            get {
+                return ResourceManager.GetString("MenuItemEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Працівники.
+        /// </summary>
+        public static string MenuItemEmployees {
+            get {
+                return ResourceManager.GetString("MenuItemEmployees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вийти.
+        /// </summary>
+        public static string MenuItemExit {
+            get {
+                return ResourceManager.GetString("MenuItemExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Допомога.
+        /// </summary>
+        public static string MenuItemHelp {
+            get {
+                return ResourceManager.GetString("MenuItemHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Відкрити додаток.
+        /// </summary>
+        public static string OpenAttachmentButton {
+            get {
+                return ResourceManager.GetString("OpenAttachmentButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вихідний документ.
+        /// </summary>
+        public static string OutgoingListTitle {
+            get {
+                return ResourceManager.GetString("OutgoingListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Друкувати додаток.
+        /// </summary>
+        public static string PrintAttachmentButton {
+            get {
+                return ResourceManager.GetString("PrintAttachmentButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Видалити елемент.
+        /// </summary>
+        public static string RemoveButtonTooltip {
+            get {
+                return ResourceManager.GetString("RemoveButtonTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Резолюція.
+        /// </summary>
+        public static string Resolution {
+            get {
+                return ResourceManager.GetString("Resolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата резолюції.
+        /// </summary>
+        public static string ResolutionCreatedAt {
+            get {
+                return ResourceManager.GetString("ResolutionCreatedAt", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Зберегти.
         /// </summary>
-        public static string Save {
+        public static string SaveButton {
             get {
-                return ResourceManager.GetString("Save", resourceCulture);
+                return ResourceManager.GetString("SaveButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Сервіс.
+        ///   Ищет локализованную строку, похожую на Вхідні.
         /// </summary>
-        public static string Service {
+        public static string TabItemIncomingDocuments {
             get {
-                return ResourceManager.GetString("Service", resourceCulture);
+                return ResourceManager.GetString("TabItemIncomingDocuments", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Налаштування.
+        ///   Ищет локализованную строку, похожую на Внутрішні.
         /// </summary>
-        public static string Settings {
+        public static string TabItemInternalDocuments {
             get {
-                return ResourceManager.GetString("Settings", resourceCulture);
+                return ResourceManager.GetString("TabItemInternalDocuments", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Переглянути довідку.
+        ///   Ищет локализованную строку, похожую на Вихідні.
         /// </summary>
-        public static string ShowInfo {
+        public static string TabItemOutgoingDocuments {
             get {
-                return ResourceManager.GetString("ShowInfo", resourceCulture);
+                return ResourceManager.GetString("TabItemOutgoingDocuments", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Переглянути.
+        ///   Ищет локализованную строку, похожую на Переглянути інформацію.
         /// </summary>
-        public static string View {
+        public static string ViewButtonTooltip {
             get {
-                return ResourceManager.GetString("View", resourceCulture);
+                return ResourceManager.GetString("ViewButtonTooltip", resourceCulture);
             }
         }
     }
