@@ -10,8 +10,9 @@
         mc:Ignorable="d"
         Title="Список організацій" 
         Height="380" 
-        Width="450" 
+        Width="642.336" 
         WindowStartupLocation="CenterOwner" 
+        Background="#FFEEF5FD"
         DataContext="{Binding CompanyListVM, Mode=OneWay, Source={StaticResource Locator}}">
 
     <Window.Resources>
@@ -39,16 +40,47 @@
                     </Button>
                     <Separator />
                     <TextBlock Text="{x:Static res:Resources.Filter}" Margin="0,7,0,4" ></TextBlock>
-                    <TextBox Width="150" Margin="0,5,0,4"></TextBox>
+                    <ComboBox IsReadOnly="True" SelectedValuePath="Key" SelectedValue="{Binding FilterType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="150" ItemsSource="{Binding FilterList}" DisplayMemberPath="Value" SelectedIndex="0" />
+                    <TextBox Style="{StaticResource placeHolder}" Tag="Введіть значення..." Width="150" Margin="0,5,0,4" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </ToolBar>
             </ToolBarTray>
 
-            <ListView SelectedItem="{Binding SelectedItem}" 
-                SelectionMode="Single" 
-                Grid.Row="1" 
-                VerticalAlignment="Stretch" 
-                HorizontalAlignment="Stretch" 
-                ItemsSource="{Binding Items}">
+            <DataGrid Grid.Row="1" 
+                      Name="CompanyList"  
+                      ItemsSource="{Binding ItemsViewSource.View}"  
+                      SelectedItem="{Binding SelectedItem}"
+                      VerticalAlignment="Stretch" 
+                      HorizontalAlignment="Stretch" 
+                      Margin="0,10,0,0" 
+                      AutoGenerateColumns="False" 
+                      GridLinesVisibility="Horizontal" 
+                      SelectionMode="Single" 
+                      IsReadOnly="True" 
+                      Focusable="False">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Назва" Width="175" Binding="{Binding Title}" SortDirection="Ascending"/>
+                    <DataGridTextColumn Header="Місто" Width="100" Binding="{Binding Location}" />
+                    <DataGridTextColumn Header="Адреса" Width="200" Binding="{Binding LegalAddress}" />
+                    <DataGridTextColumn Header="Керівник" Width="150" Binding="{Binding Director}" />
+                </DataGrid.Columns>
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+
+                <DataGrid.VerticalGridLinesBrush>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+                </DataGrid.VerticalGridLinesBrush>
+                <DataGrid.HorizontalGridLinesBrush>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+                </DataGrid.HorizontalGridLinesBrush>
 
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
@@ -56,16 +88,9 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
 
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Наименование" Width="100" DisplayMemberBinding="{Binding Title}"/>
-                        <GridViewColumn Header="Город" Width="100" DisplayMemberBinding="{Binding Location}" />
-                        <GridViewColumn Header="Руководитель" Width="100" DisplayMemberBinding="{Binding Director}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            </DataGrid>
 
-            <StatusBar Grid.Row="2" VerticalAlignment="Stretch" >
+            <StatusBar Grid.Row="2" VerticalAlignment="Stretch" Background="#FFEEF5FD">
                 <TextBlock Name="StatusText" Text="{Binding StatusText}"></TextBlock>
             </StatusBar>
         </Grid>
