@@ -11,7 +11,7 @@ namespace ImpoDoc.ViewModel
             get
             {
                 return selectFileCommand ??
-                  (selectFileCommand = new RelayCommand<object>(obj => ActiveItem.Attachment.Create(), delegate (object arg) { return true; }));
+                  (selectFileCommand = new RelayCommand<object>(obj => ActiveItem.Attachment.Create(), CanExecute));
             }
         }
 

@@ -16,22 +16,32 @@ namespace ImpoDoc.ViewModel
     {
         protected override ItemDetailsViewModel<OutgoingDocument> ItemDetailsVM => IocKernel.Get<OutgoingDocDetailsViewModel>();
         private OutgoingDocDetailsWnd ItemDetailsWnd => IocKernel.Get<OutgoingDocDetailsWnd>();
-
+        public override Dictionary<string, string> FilterList => new Dictionary<string, string>
+        {
+            { "Name",  "Назва документа" },
+            { "OutgoingIndex",  "Індекс документа"},
+            { "IncomingIndex", "Індекс кореспондента" },
+            { "DocumentType", "Тип документа" },
+            { "Description", "Короткий зміст" },
+            { "Location", "Місце знаходження" },
+        };
         public async Task LoadDataAsync()
         {
             BusyStatus.Content = "Завантаження списку вихідних документів...";
             {
                 using (var context = new DatabaseContext())
                 {
-                    List<OutgoingDocument> result = await Task.Run(() => context.OutgoingDocuments
-                        .Include(document => document.Attachment)
-                        .Include(document => document.Checkout)
-                        .Include(document => document.Counter)
-                        .Include(document => document.Correspondent)
-                        .Include(document => document.Execution)
-                            .ThenInclude(execution => execution.Executor)
-                        .ToListAsync());
-                    Items = new ObservableCollection<OutgoingDocument>(result);
+                    Logger.Debug("Завантаження списку вихідних документів...");
+                    List<OutgoingDocument> items = await Task.Run(() => context.OutgoingDocuments
+                           .Include(document => document.Attachment)
+                           .Include(document => document.Checkout)
+                           .Include(document => document.Counter)
+                           .Include(document => document.Correspondent)
+                           .Include(document => document.Execution)
+                               .ThenInclude(execution => execution.Executor)
+                           .ToListAsync());
+                    UpdateItemsViewSource(items);
+                    Logger.Debug("Завантаження списку вихідних документів закінчено");
                 }
             }
         }
@@ -64,9 +74,12 @@ namespace ImpoDoc.ViewModel
                                   context.SaveChanges();
                                   _ = Items.Remove(SelectedItem);
                                   transaction.Commit();
+                                  Logger.Debug("Виконана транзакція по видаленню вихідного документа");
                               }
-                              catch
+                              catch (Exception e)
                               {
+                                  Logger.Debug("Транзакція по видаленню вихідного документа закінчилася з помилкою");
+                                  Logger.Error(e.StackTrace);
                                   transaction.Rollback();
                               }
                           }
@@ -99,6 +112,7 @@ namespace ImpoDoc.ViewModel
                         if (isNew)
                         {
                             Items.Add(ItemDetailsVM.ActiveItem);
+                            Logger.Debug("Виконано додання нового вихідного документа");
                         }
                         else
                         {
@@ -110,9 +124,12 @@ namespace ImpoDoc.ViewModel
                             }
                         }
                         transaction.Commit();
+                        Logger.Debug("Виконано зміну даних існуючого вихідного документа");
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
+                        Logger.Debug("Транзакція по внесенню даних вихідного документа закінчилася з помилкою");
+                        Logger.Error(e.StackTrace);
                         transaction.Rollback();
                     }
                 }

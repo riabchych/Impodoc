@@ -7,7 +7,6 @@ using ImpoDoc.Views;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace ImpoDoc.ViewModel
@@ -16,14 +15,25 @@ namespace ImpoDoc.ViewModel
     {
         protected override ItemDetailsViewModel<Company> ItemDetailsVM => IocKernel.Get<CompanyDetailsViewModel>();
         private CompanyDetailsWindow ItemDetailsWnd => IocKernel.Get<CompanyDetailsWindow>();
+        public override Dictionary<string, string> FilterList => new Dictionary<string, string>
+        {
+            { "Title",  "Назва" },
+            { "Location",  "Місто" },
+            { "LegalAddress", "Адреса" },
+            { "INN", "ЄДРПОУ" },
+            { "PhoneNumber", "Номер телефону" },
+            { "Director", "Керівник" }
+        };
 
         public async Task LoadDataAsync()
         {
-            BusyStatus.Content = "Завантаження списку компаній...";
+            BusyStatus.Content = "Завантаження списку організацій...";
             using (var context = new DatabaseContext())
             {
-                List<Company> result = await Task.Run(() => context.Companies.ToListAsync());
-                Items = new ObservableCollection<Company>(result);
+                Logger.Debug("Завантаження списку організацій...");
+                List<Company> items = await Task.Run(() => context.Companies.ToListAsync());
+                Logger.Debug("Завантаження списку організацій закінчено");
+                UpdateItemsViewSource(items);
             }
         }
 
@@ -49,9 +59,12 @@ namespace ImpoDoc.ViewModel
                                   context.SaveChanges();
                                   _ = Items.Remove(SelectedItem);
                                   transaction.Commit();
+                                  Logger.Debug("Виконана транзакція по видаленню організації");
                               }
-                              catch
+                              catch(Exception e)
                               {
+                                  Logger.Debug("Транзакція по видаленню організації закінчилася з помилкою");
+                                  Logger.Error(e.StackTrace);
                                   transaction.Rollback();
                               }
                           }
@@ -61,7 +74,7 @@ namespace ImpoDoc.ViewModel
             }
         }
 
-        protected override async void ViewItemDetailsAsync(bool isNew = false)
+        protected override void ViewItemDetailsAsync(bool isNew = false)
         {
             ItemDetailsVM.ActiveItem = isNew || SelectedItem is null ? new Company() : Utils.CloneObject(SelectedItem);
 
@@ -73,28 +86,32 @@ namespace ImpoDoc.ViewModel
                     {
                         try
                         {
+                            context.Companies.Attach(ItemDetailsVM.ActiveItem);
+                            context.SaveChanges();
+
                             if (isNew)
                             {
-                                context.Companies.Add(ItemDetailsVM.ActiveItem);
-                                await context.SaveChangesAsync();
                                 Items.Add(ItemDetailsVM.ActiveItem);
+                                Logger.Debug("Виконано додання нової організації");
+
                             }
                             else
                             {
-                                context.Companies.Update(ItemDetailsVM.ActiveItem);
-                                await context.SaveChangesAsync();
                                 int index = Items.IndexOf(SelectedItem);
 
                                 if (index >= 0 && Items.Count > index)
                                 {
                                     Items[index] = ItemDetailsVM.ActiveItem;
                                 }
+                                Logger.Debug("Виконано зміну даних існуючої організації");
                             }
 
                             transaction.Commit();
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
+                            Logger.Debug("Транзакція по внесенню даних організації закінчилася з помилкою");
+                            Logger.Error(e.StackTrace);
                             transaction.Rollback();
                         }
                     }

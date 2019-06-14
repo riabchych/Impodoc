@@ -1,4 +1,3 @@
-using ImpoDoc.Entities;
 using ImpoDoc.Ioc;
 
 namespace ImpoDoc.ViewModel

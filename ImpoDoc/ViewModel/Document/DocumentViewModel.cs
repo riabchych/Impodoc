@@ -6,18 +6,35 @@ namespace ImpoDoc.ViewModel
 {
     public class DocumentViewModel : BaseViewModel
     {
-        private const int INCOMING_DOCUMENT = 0;
-        private const int OUTGOING_DOCUMENT = 1;
-        private const int INTERNAL_DOCUMENT = 2;
-
-        // Document list view models
         public IncomingDocListViewModel IncomingDocListVM => IocKernel.Get<IncomingDocListViewModel>();
         public OutgoingDocListViewModel OutgoingDocListVM => IocKernel.Get<OutgoingDocListViewModel>();
         public InternalDocListViewModel InternalDocListVM => IocKernel.Get<InternalDocListViewModel>();
 
-        // Windows
         private EmployeeListWindow EmployeeListWnd => IocKernel.Get<EmployeeListWindow>();
         private CompanyListWindow CompanyListWnd => IocKernel.Get<CompanyListWindow>();
+        private object GetCurrentVM() => GetType().GetProperty(CurrentSection).GetValue(this, null);
+
+        public DocumentViewModel()
+        {
+            CurrentSection = "IncomingDocListVM";
+            CurrentVM = GetCurrentVM() ;
+        }
+
+        public object CurrentVM
+        {
+            get { return GetValue(() => CurrentVM); }
+            set { SetValue(() => CurrentVM, value); }
+        }
+
+        public string CurrentSection
+        {
+            get { return GetValue(() => CurrentSection); }
+            set
+            {
+                SetValue(() => CurrentSection, value);
+                CurrentVM = GetCurrentVM();
+            }
+        }
 
         // Commands
         private RelayCommand<object> viewEmployeeListCommand;
@@ -26,7 +43,7 @@ namespace ImpoDoc.ViewModel
             get
             {
                 return viewEmployeeListCommand ??
-                  (viewEmployeeListCommand = new RelayCommand<object>(obj => EmployeeListWnd.ShowDialog(), delegate (object arg) { return true; }));
+                  (viewEmployeeListCommand = new RelayCommand<object>(obj => EmployeeListWnd.ShowDialog(), CanExecute));
             }
         }
 
@@ -36,13 +53,8 @@ namespace ImpoDoc.ViewModel
             get
             {
                 return viewCompanyListCommand ??
-                  (viewCompanyListCommand = new RelayCommand<object>(obj => CompanyListWnd.ShowDialog(), delegate (object arg) { return true; }));
+                  (viewCompanyListCommand = new RelayCommand<object>(obj => CompanyListWnd.ShowDialog(), CanExecute));
             }
-        }
-        public int CurrentSectionIndex
-        {
-            get { return GetValue(() => CurrentSectionIndex); }
-            set { SetValue(() => CurrentSectionIndex, value); }
         }
 
         private RelayCommand<object> _createItemCommand;
@@ -52,19 +64,8 @@ namespace ImpoDoc.ViewModel
             {
                 return _createItemCommand ?? (_createItemCommand = new RelayCommand<object>(obj =>
                   {
-                      switch (CurrentSectionIndex)
-                      {
-                          case OUTGOING_DOCUMENT:
-                              OutgoingDocListVM.CreateItemCommand.Execute(true);
-                              break;
-                          case INTERNAL_DOCUMENT:
-                              InternalDocListVM.CreateItemCommand.Execute(true);
-                              break;
-                          default:
-                              IncomingDocListVM.CreateItemCommand.Execute(true);
-                              break;
-                      }
-                  }, delegate (object arg) { return true; }));
+                      ((RelayCommand<object>)CurrentVM.GetType().GetProperty("CreateItemCommand").GetValue(CurrentVM, null)).Execute(true);
+                  }, CanExecute));
             }
         }
 
@@ -75,19 +76,8 @@ namespace ImpoDoc.ViewModel
             {
                 return _viewItemDetailsCommand ?? (_viewItemDetailsCommand = new RelayCommand<object>(obj =>
                 {
-                    switch (CurrentSectionIndex)
-                    {
-                        case OUTGOING_DOCUMENT:
-                            OutgoingDocListVM.ViewItemDetailsCommand.Execute(true);
-                            break;
-                        case INTERNAL_DOCUMENT:
-                            InternalDocListVM.ViewItemDetailsCommand.Execute(true);
-                            break;
-                        default:
-                            IncomingDocListVM.ViewItemDetailsCommand.Execute(true);
-                            break;
-                    }
-                }, delegate (object arg) { return true; }));
+                    ((RelayCommand<object>)CurrentVM.GetType().GetProperty("ViewItemDetailsCommand").GetValue(CurrentVM, null)).Execute(true);
+                }, CanExecute));
             }
         }
 
@@ -98,19 +88,8 @@ namespace ImpoDoc.ViewModel
             {
                 return _removeItemCommand ?? (_removeItemCommand = new RelayCommand<object>(obj =>
                 {
-                    switch (CurrentSectionIndex)
-                    {
-                        case OUTGOING_DOCUMENT:
-                            OutgoingDocListVM.RemoveItemCommand.Execute(true);
-                            break;
-                        case INTERNAL_DOCUMENT:
-                            InternalDocListVM.RemoveItemCommand.Execute(true);
-                            break;
-                        default:
-                            IncomingDocListVM.RemoveItemCommand.Execute(true);
-                            break;
-                    }
-                }, delegate (object arg) { return true; }));
+                    ((RelayCommand<object>)CurrentVM.GetType().GetProperty("RemoveItemCommand").GetValue(CurrentVM, null)).Execute(true);
+                }, CanExecute));
             }
         }
     }

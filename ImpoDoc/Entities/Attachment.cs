@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using ImpoDoc.Common.Logger;
+using Microsoft.Win32;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.IO;
@@ -9,6 +10,8 @@ namespace ImpoDoc.Entities
     [Table("Attachments")]
     public class Attachment : BaseEntity<Attachment>
     {
+        private readonly ILogger Logger;
+
         public string Filename
         {
             get { return GetValue(() => Filename); }
@@ -43,10 +46,17 @@ namespace ImpoDoc.Entities
             Content = File.ReadAllBytes(Path);
         }
 
+
+        public Attachment()
+        {
+            Logger = LoggerFactory.Create<TraceLogger>();
+        }
+
         public string CreateTempFile()
         {
             string path = System.IO.Path.GetTempFileName() + System.IO.Path.GetExtension(Path);
             @File.WriteAllBytes(path, Content);
+            Logger.Debug($"Створенно тимчасовий файл: {path}");
             return path;
         }
 
@@ -57,6 +67,7 @@ namespace ImpoDoc.Entities
             process.StartInfo.FileName = path;
             process.Exited += (s, e) => @File.Delete(path);
             process.Start();
+            Logger.Debug($"Відбулось відкриття тимчасового файлу {path} зовнішньою програмою");
         }
 
         public void CreateAndPrintFile()
@@ -80,6 +91,8 @@ namespace ImpoDoc.Entities
                 };
                 process.Exited += (s, e) => @File.Delete(path);
                 process.Start();
+                Logger.Debug($"Відбулось друкування тимчасового файлу {path} ");
+
             }
         }
 

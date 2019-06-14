@@ -7,7 +7,7 @@ using ImpoDoc.Views;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace ImpoDoc.ViewModel
@@ -16,14 +16,25 @@ namespace ImpoDoc.ViewModel
     {
         protected override ItemDetailsViewModel<Employee> ItemDetailsVM => IocKernel.Get<EmployeeDetailsViewModel>();
         private EmployeeDetailsWindow ItemDetailsWnd => IocKernel.Get<EmployeeDetailsWindow>();
+        public override Dictionary<string, string> FilterList => new Dictionary<string, string>
+        {
+            { "FirstName",  "Ім'я" },
+            { "LastName",  "Прізвище"},
+            { "MiddleName", "По батькові" },
+            { "Email", "Ел. пошта" },
+            { "Department", "Відділ" },
+            { "PhoneNumber", "Номер телефону" }
+        };
 
         public async Task LoadDataAsync()
         {
             BusyStatus.Content = "Завантаження списку працівників...";
             using (var context = new DatabaseContext())
             {
-                List<Employee> result = await Task.Run(() => context.Employees.ToListAsync());
-                Items = new ObservableCollection<Employee>(result);
+                Logger.Debug("Завантаження списку працівників...");
+                List<Employee> items = await Task.Run(() => context.Employees.ToListAsync());
+                Logger.Debug("Завантаження списку працівників закінчено");
+                UpdateItemsViewSource(items);
             }
         }
 
@@ -49,9 +60,12 @@ namespace ImpoDoc.ViewModel
                                   context.SaveChanges();
                                   _ = Items.Remove(SelectedItem);
                                   transaction.Commit();
+                                  Logger.Debug("Виконана транзакція по видаленню працівника");
                               }
-                              catch
+                              catch(Exception e)
                               {
+                                  Logger.Debug("Транзакція по видаленню працівника закінчилася з помилкою");
+                                  Logger.Error(e.StackTrace);
                                   transaction.Rollback();
                               }
                           }
@@ -78,6 +92,7 @@ namespace ImpoDoc.ViewModel
                                 context.Employees.Add(ItemDetailsVM.ActiveItem);
                                 context.SaveChanges();
                                 Items.Add(ItemDetailsVM.ActiveItem);
+                                Logger.Debug("Виконано додання нового працівника");
                             }
                             else
                             {
@@ -88,12 +103,16 @@ namespace ImpoDoc.ViewModel
                                 {
                                     Items[index] = ItemDetailsVM.ActiveItem;
                                 }
+                                Logger.Debug("Виконано зміну даних існуючого працівника");
                             }
 
                             transaction.Commit();
+                            Logger.Debug("Виконана транзакція по внесенню даних працівника");
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
+                            Logger.Debug("Транзакція по внесенню даних працівника закінчилася з помилкою");
+                            Logger.Error(e.StackTrace);
                             transaction.Rollback();
                         }
                     }

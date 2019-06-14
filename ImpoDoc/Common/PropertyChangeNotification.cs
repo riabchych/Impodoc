@@ -237,9 +237,7 @@ namespace ImpoDoc.Common
             {
                 string msg = "Invalid property name: " + propertyName;
 
-                if (ThrowOnInvalidPropertyName)
-                    throw new Exception(msg);
-                else
+                if (!ThrowOnInvalidPropertyName)
                     Debug.Fail(msg);
             }
         }

@@ -1,10 +1,5 @@
 ﻿using ImpoDoc.Commands;
-using ImpoDoc.Entities;
-using Microsoft.Win32;
-using System.Diagnostics;
-using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace ImpoDoc.ViewModel
 {

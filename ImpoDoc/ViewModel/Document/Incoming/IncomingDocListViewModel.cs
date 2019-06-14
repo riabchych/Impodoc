@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows.Documents;
 
 namespace ImpoDoc.ViewModel
 {
@@ -17,22 +19,35 @@ namespace ImpoDoc.ViewModel
         protected override ItemDetailsViewModel<IncomingDocument> ItemDetailsVM => IocKernel.Get<IncomingDocDetailsViewModel>();
         private IncomingDocDetailsWnd ItemDetailsWnd => IocKernel.Get<IncomingDocDetailsWnd>();
 
+        public override Dictionary<string, string> FilterList => new Dictionary<string, string>
+        {
+            { "Name",  "Назва документа" },
+            { "OutgoingIndex",  "Індекс документа"},
+            { "IncomingIndex", "Індекс кореспондента" },
+            { "DocumentType", "Тип документа" },
+            { "Description", "Короткий зміст" },
+            { "Location", "Місце знаходження" },
+        };
+
+
         public async Task LoadDataAsync()
         {
             BusyStatus.Content = "Завантаження списку вхідних документів...";
             {
                 using (var context = new DatabaseContext())
                 {
-                    List<IncomingDocument> result = await Task.Run(() => context.IncomingDocuments
-                        .Include(document => document.Attachment)
-                        .Include(document => document.Checkout)
-                        .Include(document => document.Counter)
-                        .Include(document => document.Correspondent)
-                        .Include(document => document.Resolution)
-                        .Include(document => document.Execution)
-                            .ThenInclude(execution => execution.Executor)
-                        .ToListAsync());
-                    Items = new ObservableCollection<IncomingDocument>(result);
+                    Logger.Debug("Завантаження списку вхідних документів...");
+                    List<IncomingDocument> items = await Task.Run(() => context.IncomingDocuments
+                           .Include(document => document.Attachment)
+                           .Include(document => document.Checkout)
+                           .Include(document => document.Counter)
+                           .Include(document => document.Correspondent)
+                           .Include(document => document.Resolution)
+                           .Include(document => document.Execution)
+                               .ThenInclude(execution => execution.Executor)
+                           .ToListAsync());
+                    Logger.Debug("Завантаження списку вхідних документів закінчено");
+                    UpdateItemsViewSource(items);
                 }
             }
         }
@@ -66,9 +81,12 @@ namespace ImpoDoc.ViewModel
                                   context.SaveChanges();
                                   _ = Items.Remove(SelectedItem);
                                   transaction.Commit();
+                                  Logger.Debug("Виконана транзакція по видаленню вхідного документа");
                               }
-                              catch
+                              catch (Exception e)
                               {
+                                  Logger.Debug("Транзакція по видаленню вхідного документа закінчилася з помилкою");
+                                  Logger.Error(e.StackTrace);
                                   transaction.Rollback();
                               }
                           }
@@ -101,6 +119,8 @@ namespace ImpoDoc.ViewModel
                         if (isNew)
                         {
                             Items.Add(ItemDetailsVM.ActiveItem);
+                            Logger.Debug("Виконано додання нового вхідного документа");
+
                         }
                         else
                         {
@@ -110,11 +130,14 @@ namespace ImpoDoc.ViewModel
                             {
                                 Items[index] = ItemDetailsVM.ActiveItem;
                             }
+                            Logger.Debug("Виконано зміну даних існуючого вхідного документа");
                         }
                         transaction.Commit();
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
+                        Logger.Debug("Транзакція по внесенню даних вхідного документа закінчилася з помилкою");
+                        Logger.Error(e.StackTrace);
                         transaction.Rollback();
                     }
                 }

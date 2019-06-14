@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,7 +9,7 @@ namespace ImpoDoc.Entities
     {
         [DisplayName("Имя")]
         [Required(ErrorMessage = "Поле \"Имя\" обязательное")]
-        [StringLength(15, ErrorMessage = "Длина имени не может превышать 15 символов")]
+        [StringLength(15, ErrorMessage = "Длина имени не может превышать 20 символов")]
         public string FirstName
         {
             get { return GetValue(() => FirstName); }
@@ -20,7 +18,7 @@ namespace ImpoDoc.Entities
 
         [DisplayName("Фамилия")]
         [Required(ErrorMessage = "Поле \"Фамилия\" обязательное")]
-        [StringLength(15, ErrorMessage = "Длина фамилии не может превышать 15 символов")]
+        [StringLength(15, ErrorMessage = "Длина фамилии не может превышать 20 символов")]
         public string LastName
         {
             get { return GetValue(() => LastName); }
@@ -29,7 +27,7 @@ namespace ImpoDoc.Entities
 
         [DisplayName("Отчество")]
         [Required(ErrorMessage = "Поле \"Отчество\" обязательное")]
-        [StringLength(15, ErrorMessage = "Длина отчества не может превышать 15 символов")]
+        [StringLength(15, ErrorMessage = "Длина отчества не может превышать 20 символов")]
         public string MiddleName
         {
             get { return GetValue(() => MiddleName); }
@@ -56,7 +54,7 @@ namespace ImpoDoc.Entities
 
         [DisplayName("Отдел")]
         [Required(ErrorMessage = "Поле \"Отдел\" обязательное")]
-        [StringLength(15, ErrorMessage = "Название отдела не может превышать 15 символов")]
+        [StringLength(50, ErrorMessage = "Название отдела не может превышать 150 символов")]
         public string Department
         {
             get { return GetValue(() => Department); }
@@ -64,8 +62,8 @@ namespace ImpoDoc.Entities
         }
 
         [DisplayName("Номер телефона")]
-        [StringLength(11, ErrorMessage = "Длина номера телефона - 11 символов")]
-        [MinLength(11, ErrorMessage = "Длина номера телефона - 11 символов")]
+        [StringLength(10, ErrorMessage = "Длина номера телефона - 10 символов")]
+        [MinLength(10, ErrorMessage = "Длина номера телефона - 10 символов")]
         public string PhoneNumber
         {
             get { return GetValue(() => PhoneNumber); }
@@ -74,8 +72,8 @@ namespace ImpoDoc.Entities
 
         [DisplayName("Дата рождения")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
-        public DateTime DateOfBirth
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{1:dd.MM.yyyy}")]
+        public string DateOfBirth
         {
             get { return GetValue(() => DateOfBirth); }
             set { SetValue(() => DateOfBirth, value); }
@@ -86,6 +84,15 @@ namespace ImpoDoc.Entities
         {
             get { return GetValue(() => Executor); }
             set { SetValue(() => Executor, value); }
+        }
+
+        [NotMapped]
+        public string DisplayName
+        {
+            get
+            {
+                return $"{LastName} {FirstName} {MiddleName}";
+            }
         }
     }
 }
