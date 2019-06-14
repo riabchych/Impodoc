@@ -8,7 +8,8 @@
         xmlns:common="clr-namespace:ImpoDoc.Common"
         xmlns:res="clr-namespace:ImpoDoc.Properties"
         mc:Ignorable="d"
-        Title="Список документов" Height="450" Width="780"
+        Background="#FFEEF5FD"
+        Title="Список документів" Height="450" Width="780"
         WindowStartupLocation="CenterOwner">
 
     <Window.Resources>
@@ -20,78 +21,104 @@
 
     <extToolkit:BusyIndicator BusyContent="{Binding Path=(common:BusyStatus.Content)}" IsBusy="{Binding Path=(common:BusyStatus.IsBusy)}">
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
+                <RowDefinition Height="18" />
                 <RowDefinition Height="36" />
                 <RowDefinition />
                 <RowDefinition Height="24" />
             </Grid.RowDefinitions>
 
             <Menu Background="{x:Null}">
-                <MenuItem Header="{x:Static res:Resources.File}" Foreground="Black">
-                    <MenuItem Header="{x:Static res:Resources.Create}" Command="{Binding NewCommand}" />
-                    <MenuItem Header="{x:Static res:Resources.Open}" Command="{Binding AddCommand}" />
-                    <Separator />
-                    <MenuItem Header="{x:Static res:Resources.Import}" Command="{Binding ImportCommand}" />
-                    <MenuItem Header="{x:Static res:Resources.Export}" />
+                <MenuItem Header="Документ" Foreground="Black">
+                    <MenuItem Header="{x:Static res:Resources.Create}" Command="{Binding Command, ElementName=createBtn}" />
                     <Separator />
                     <MenuItem Header="{x:Static res:Resources.Exit}" />
                 </MenuItem>
-                <MenuItem Header="{x:Static res:Resources.Edit}">
-                    <MenuItem Header="{x:Static res:Resources.ApplyChanges}" Command="{Binding EditCommand}"
-                                  IsEnabled="{Binding IsSelected, Mode=OneWay}" />
-                    <MenuItem Header="{x:Static res:Resources.Cut}" Command="{Binding CutCommand}"
+                <MenuItem Header="Правка">
+                    <MenuItem Header="Редагувати" Command="{Binding Command, ElementName=viewBtn}"
                                   IsEnabled="{Binding SelectedDocuments.Count, Mode=OneWay}" />
-                    <MenuItem Header="{x:Static res:Resources.Copy}" Command="{Binding CopyCommand}"
+                    <MenuItem Header="{x:Static res:Resources.Delete}" Command="{Binding Command, ElementName=delBtn}"
                                   IsEnabled="{Binding SelectedDocuments.Count, Mode=OneWay}" />
-                    <MenuItem Header="{x:Static res:Resources.Delete}" Command="{Binding DeleteCommand}"
-                                  IsEnabled="{Binding SelectedDocuments.Count, Mode=OneWay}" />
-                    <MenuItem Header="{x:Static res:Resources.Insert}" />
+
                 </MenuItem>
-                <MenuItem Header="{x:Static res:Resources.Service}">
+                <MenuItem Header="Довідники">
                     <MenuItem Header="{x:Static res:Resources.Employees}" Command="{Binding ViewEmployeeListCommand}" />
                     <MenuItem Header="Підприємства" Command="{Binding ViewCompanyListCommand}" />
-                    <MenuItem Header="{x:Static res:Resources.Maintenance}" />
-                    <MenuItem Header="{x:Static res:Resources.ArchiveAndRecovery}" />
-                    <Separator />
-                    <MenuItem Header="{x:Static res:Resources.Settings}" />
                 </MenuItem>
                 <MenuItem Header="{x:Static res:Resources.Help}">
-                    <MenuItem Header="{x:Static res:Resources.ShowInfo}" />
                     <MenuItem Header="{x:Static res:Resources.AboutApp}" />
                 </MenuItem>
             </Menu>
 
-            <ToolBarTray Height="36" Grid.Row="1" VerticalAlignment="Top" >
+            <ToolBarTray Height="36" Grid.Row="1" VerticalAlignment="Top" DataContext="{Binding CurrentVM}" Grid.ColumnSpan="2" >
                 <ToolBar Height="36" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  >
-                    <Button ToolTip="{x:Static res:Resources.View}" Command="{Binding ViewItemDetailsCommand}">
+                    <Button x:Name="viewBtn" ToolTip="{x:Static res:Resources.View}" Command="{Binding ViewItemDetailsCommand}">
                         <Path Stretch="Uniform" Fill="#FF000000"  Data="{DynamicResource UserIcon}" />
                     </Button>
-                    <Button ToolTip="{x:Static res:Resources.Create}" Command="{Binding CreateItemCommand}">
+                    <Button x:Name="createBtn" ToolTip="{x:Static res:Resources.Create}" Command="{Binding CreateItemCommand}">
                         <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserAddIcon}"/>
                     </Button>
-                    <Button ToolTip="{x:Static res:Resources.Delete}" Command="{Binding RemoveItemCommand}">
+                    <Button x:Name="delBtn" ToolTip="{x:Static res:Resources.Delete}" Command="{Binding RemoveItemCommand}">
                         <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserDeleteIcon}"/>
                     </Button>
                     <Separator />
                     <TextBlock Text="{x:Static res:Resources.Filter}" Margin="0,7,0,4" ></TextBlock>
-                    <TextBox Width="150" Margin="0,5,0,4"></TextBox>
+                    <ComboBox IsReadOnly="True" SelectedValuePath="Key" SelectedValue="{Binding FilterType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="150" ItemsSource="{Binding FilterList}" DisplayMemberPath="Value" SelectedIndex="0" />
+                    <TextBox Style="{StaticResource placeHolder}" Tag="Введіть значення..." Width="150" Margin="0,5,0,4" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </ToolBar>
             </ToolBarTray>
 
             <TabControl 
                 Grid.Row="2"
+                Background="#FFEEF5FD"
                 VerticalAlignment="Stretch" 
                 HorizontalAlignment="Stretch"
-                SelectedIndex="{Binding CurrentSectionIndex}">
+                SelectedValue="{Binding CurrentSection}"
+                SelectedValuePath="Tag" Grid.ColumnSpan="2">
 
-                <TabItem Header="Вхідні"  DataContext="{Binding IncomingDocListVM, Mode=OneWay, Source={StaticResource Locator}}">
-                    <ListView SelectedItem="{Binding SelectedItem}" 
-                        SelectionMode="Single" 
-                        Name="IncomingList" 
-                        VerticalAlignment="Stretch" 
-                        HorizontalAlignment="Stretch" 
-                        ItemsSource="{Binding Items}">
+                <TabItem Tag="IncomingDocListVM" Header="Вхідні" DataContext="{Binding IncomingDocListVM, Mode=OneWay, Source={StaticResource Locator}}">
+                    <DataGrid
+                      Name="IncomingDocList"  
+                      ItemsSource="{Binding ItemsViewSource.View}"  
+                      SelectedItem="{Binding SelectedItem}"
+                      VerticalAlignment="Stretch" 
+                      HorizontalAlignment="Stretch" 
+                      Margin="0,10,0,0" 
+                      AutoGenerateColumns="False" 
+                      GridLinesVisibility="Horizontal" 
+                      SelectionMode="Single" 
+                      IsReadOnly="True" 
+                      Focusable="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Дата документу" Width="175" Binding="{Binding CreatedAt}" />
+                            <DataGridTextColumn Header="Індекс" Width="100" Binding="{Binding OutgoingIndex}" />
+                            <DataGridTextColumn Header="Індекс кореспондента" Width="200" Binding="{Binding IncomingIndex}" />
+                            <DataGridTextColumn Header="Назва документу" Width="200" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="Кореспондент" Width="150" Binding="{Binding Correspondent.Title}" />
+                            <DataGridTextColumn Header="Дата надходження" Width="150" Binding="{Binding ReceivedAt}" SortDirection="Descending" />
+                            <DataGridTextColumn Header="Тип документу" Width="150" Binding="{Binding DocumentType}" />
+                        </DataGrid.Columns>
+
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+
+                        <DataGrid.VerticalGridLinesBrush>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+                        </DataGrid.VerticalGridLinesBrush>
+                        <DataGrid.HorizontalGridLinesBrush>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+                        </DataGrid.HorizontalGridLinesBrush>
 
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
@@ -99,25 +126,48 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
 
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Дата документу" Width="100" DisplayMemberBinding="{Binding CreatedAt}" />
-                                <GridViewColumn Header="Індекс" Width="100" DisplayMemberBinding="{Binding OutgoingIndex}"/>
-                                <GridViewColumn Header="Індекс кореспондента" Width="100" DisplayMemberBinding="{Binding IncomingIndex}" />
-                                <GridViewColumn Header="Кореспондент" Width="100" DisplayMemberBinding="{Binding Correspondent.Title}" />
-                                <GridViewColumn Header="Дата надходження" Width="100" DisplayMemberBinding="{Binding ReceivedAt}" />
-                                <GridViewColumn Header="Тип документу" Width="100" DisplayMemberBinding="{Binding DocumentType}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    </DataGrid>
                 </TabItem>
-                <TabItem Header="Вихідні"  DataContext="{Binding OutgoingDocListVM, Mode=OneWay}">
-                    <ListView SelectedItem="{Binding SelectedItem}" 
-                        SelectionMode="Single" 
-                        Name="OutgoingList" 
-                        VerticalAlignment="Stretch" 
-                        HorizontalAlignment="Stretch" 
-                        ItemsSource="{Binding Items}">
+                <TabItem Tag="OutgoingDocListVM" Header="Вихідні"  DataContext="{Binding OutgoingDocListVM, Mode=OneWay}">
+                    <DataGrid
+                      Name="OutgoingDocList"  
+                      ItemsSource="{Binding ItemsViewSource.View}"  
+                      SelectedItem="{Binding SelectedItem}"
+                      VerticalAlignment="Stretch" 
+                      HorizontalAlignment="Stretch" 
+                      Margin="0,10,0,0" 
+                      AutoGenerateColumns="False" 
+                      GridLinesVisibility="Horizontal" 
+                      SelectionMode="Single" 
+                      IsReadOnly="True" 
+                      Focusable="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Дата документу" Width="175" Binding="{Binding CreatedAt}" />
+                            <DataGridTextColumn Header="Індекс" Width="100" Binding="{Binding OutgoingIndex}" />
+                            <DataGridTextColumn Header="Індекс кореспондента" Width="200" Binding="{Binding IncomingIndex}" />
+                            <DataGridTextColumn Header="Назва документу" Width="200" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="Кореспондент" Width="150" Binding="{Binding Correspondent.Title}" />
+                            <DataGridTextColumn Header="Дата надходження" Width="150" Binding="{Binding ReceivedAt}" SortDirection="Descending" />
+                            <DataGridTextColumn Header="Тип документу" Width="150" Binding="{Binding DocumentType}" />
+                        </DataGrid.Columns>
+
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+
+                        <DataGrid.VerticalGridLinesBrush>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+                        </DataGrid.VerticalGridLinesBrush>
+                        <DataGrid.HorizontalGridLinesBrush>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+                        </DataGrid.HorizontalGridLinesBrush>
 
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
@@ -125,25 +175,49 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
 
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Дата документу" Width="100" DisplayMemberBinding="{Binding CreatedAt}" />
-                                <GridViewColumn Header="Індекс" Width="100" DisplayMemberBinding="{Binding OutgoingIndex}"/>
-                                <GridViewColumn Header="Індекс кореспондента" Width="100" DisplayMemberBinding="{Binding IncomingIndex}" />
-                                <GridViewColumn Header="Кореспондент" Width="100" DisplayMemberBinding="{Binding Correspondent.Title}" />
-                                <GridViewColumn Header="Дата надходження" Width="100" DisplayMemberBinding="{Binding ReceivedAt}" />
-                                <GridViewColumn Header="Тип документу" Width="100" DisplayMemberBinding="{Binding DocumentType}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    </DataGrid>
                 </TabItem>
-                <TabItem Header="Внутрішні" DataContext="{Binding InternalDocListVM, Mode=OneWay}">
-                    <ListView SelectedItem="{Binding SelectedItem}" 
-                        SelectionMode="Single" 
-                        Name="InternalList" 
-                        VerticalAlignment="Stretch" 
-                        HorizontalAlignment="Stretch" 
-                        ItemsSource="{Binding Items}">
+                <TabItem Tag="InternalDocListVM" Header="Внутрішні" DataContext="{Binding InternalDocListVM, Mode=OneWay}">
+                    <DataGrid
+                      Name="InternalDocList"  
+                      ItemsSource="{Binding ItemsViewSource.View}"  
+                      SelectedItem="{Binding SelectedItem}"
+                      VerticalAlignment="Stretch" 
+                      HorizontalAlignment="Stretch" 
+                      Margin="0,10,0,0" 
+                      AutoGenerateColumns="False" 
+                      GridLinesVisibility="Horizontal" 
+                      SelectionMode="Single" 
+                      IsReadOnly="True" 
+                      Focusable="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Дата документу" Width="175" Binding="{Binding CreatedAt}" />
+                            <DataGridTextColumn Header="Індекс адресанта" Width="100" Binding="{Binding OutgoingIndex}" />
+                            <DataGridTextColumn Header="Індекс адресата" Width="200" Binding="{Binding IncomingIndex}" />
+                            <DataGridTextColumn Header="Назва документу" Width="200" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="Адресат" Width="150" Binding="{Binding Addressee.DisplayName}" />
+                            <DataGridTextColumn Header="Адресант" Width="150" Binding="{Binding Addresser.DisplayName}" SortDirection="Descending" />
+                            <DataGridTextColumn Header="Дата надходження" Width="150" Binding="{Binding ReceivedAt}" />
+                            <DataGridTextColumn Header="Тип документу" Width="150" Binding="{Binding DocumentType}" />
+                        </DataGrid.Columns>
+
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+
+                        <DataGrid.VerticalGridLinesBrush>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+                        </DataGrid.VerticalGridLinesBrush>
+                        <DataGrid.HorizontalGridLinesBrush>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+                        </DataGrid.HorizontalGridLinesBrush>
 
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
@@ -151,26 +225,14 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
 
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Дата документу" Width="100" DisplayMemberBinding="{Binding CreatedAt}" />
-                                <GridViewColumn Header="Індекс адресанта" Width="100" DisplayMemberBinding="{Binding OutgoingIndex}"/>
-                                <GridViewColumn Header="Індекс адресата" Width="100" DisplayMemberBinding="{Binding IncomingIndex}" />
-                                <GridViewColumn Header="Назва документу" Width="100" DisplayMemberBinding="{Binding Name}" />
-                                <GridViewColumn Header="Адресат" Width="100" DisplayMemberBinding="{Binding Addressee.LastName}" />
-                                <GridViewColumn Header="Адресант" Width="100" DisplayMemberBinding="{Binding Addresser.LastName}" />
-                                <GridViewColumn Header="Дата надходження" Width="100" DisplayMemberBinding="{Binding ReceivedAt}" />
-                                <GridViewColumn Header="Тип документу" Width="100" DisplayMemberBinding="{Binding DocumentType}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    </DataGrid>
+
                 </TabItem>
             </TabControl>
 
-            <StatusBar Grid.Row="3" VerticalAlignment="Stretch" >
+            <StatusBar DataContext="{Binding CurrentVM}" Grid.Row="3" VerticalAlignment="Stretch" Background="#FFEEF5FD" Grid.ColumnSpan="2" >
                 <TextBlock Name="StatusText" Text="{Binding StatusText}"></TextBlock>
             </StatusBar>
-
         </Grid>
     </extToolkit:BusyIndicator>
 </Window>
