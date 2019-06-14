@@ -15,7 +15,7 @@
         WindowStartupLocation="CenterOwner">
 
     <Window.Resources>
-        <ResourceDictionary Source="/ImpoDoc;component/Properties/IconDictionary.xaml" />
+        <ResourceDictionary Source="/ImpoDoc;component/Properties/ApplicationDictionary.xaml" />
     </Window.Resources>
     <Window.DataContext>
         <Binding Mode="OneWay" Path="DocumentVM" Source="{StaticResource Locator}"/>
@@ -42,7 +42,7 @@
                 <MenuItem Header="{x:Static res:Resources.MenuItemEdit}">
                     <MenuItem Header="{x:Static res:Resources.MenuItemChange}" Command="{Binding Command, ElementName=viewBtn}"
                                   IsEnabled="{Binding SelectedDocuments.Count, Mode=OneWay}" />
-                    <MenuItem Header="MenuItemDelete" Command="{Binding Command, ElementName=delBtn}"
+                    <MenuItem Header="{x:Static res:Resources.MenuItemDelete}" Command="{Binding Command, ElementName=delBtn}"
                                   IsEnabled="{Binding SelectedDocuments.Count, Mode=OneWay}" />
 
                 </MenuItem>

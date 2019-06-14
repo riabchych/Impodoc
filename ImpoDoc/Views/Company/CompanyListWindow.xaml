@@ -16,7 +16,7 @@
         DataContext="{Binding CompanyListVM, Mode=OneWay, Source={StaticResource Locator}}">
 
     <Window.Resources>
-        <ResourceDictionary Source="/ImpoDoc;component/Properties/IconDictionary.xaml" />
+        <ResourceDictionary Source="/ImpoDoc;component/Properties/ApplicationDictionary.xaml" />
     </Window.Resources>
 
     <extToolkit:BusyIndicator BusyContent="{Binding Path=(common:BusyStatus.Content)}" IsBusy="{Binding Path=(common:BusyStatus.IsBusy)}">
