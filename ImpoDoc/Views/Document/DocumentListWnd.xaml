@@ -1,15 +1,17 @@
 ﻿<Window x:Class="ImpoDoc.Views.Document.DocumentListWnd"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:common="clr-namespace:ImpoDoc.Common"
         xmlns:res="clr-namespace:ImpoDoc.Properties"
         mc:Ignorable="d"
         Background="#FFEEF5FD"
-        Title="Список документів" Height="450" Width="780"
+        Title="{x:Static res:Resources.DocumentListTitle}"  
+        Height="450" 
+        Width="780"
         WindowStartupLocation="CenterOwner">
 
     <Window.Resources>
@@ -32,42 +34,51 @@
             </Grid.RowDefinitions>
 
             <Menu Background="{x:Null}">
-                <MenuItem Header="Документ" Foreground="Black">
-                    <MenuItem Header="{x:Static res:Resources.Create}" Command="{Binding Command, ElementName=createBtn}" />
+                <MenuItem Header="{x:Static res:Resources.MenuItemDocument}" Foreground="Black">
+                    <MenuItem Header="{x:Static res:Resources.MenuItemCreate}" Command="{Binding Command, ElementName=createBtn}" />
                     <Separator />
-                    <MenuItem Header="{x:Static res:Resources.Exit}" />
+                    <MenuItem Header="{x:Static res:Resources.MenuItemExit}" />
                 </MenuItem>
-                <MenuItem Header="Правка">
-                    <MenuItem Header="Редагувати" Command="{Binding Command, ElementName=viewBtn}"
+                <MenuItem Header="{x:Static res:Resources.MenuItemEdit}">
+                    <MenuItem Header="{x:Static res:Resources.MenuItemChange}" Command="{Binding Command, ElementName=viewBtn}"
                                   IsEnabled="{Binding SelectedDocuments.Count, Mode=OneWay}" />
-                    <MenuItem Header="{x:Static res:Resources.Delete}" Command="{Binding Command, ElementName=delBtn}"
+                    <MenuItem Header="MenuItemDelete" Command="{Binding Command, ElementName=delBtn}"
                                   IsEnabled="{Binding SelectedDocuments.Count, Mode=OneWay}" />
 
                 </MenuItem>
-                <MenuItem Header="Довідники">
-                    <MenuItem Header="{x:Static res:Resources.Employees}" Command="{Binding ViewEmployeeListCommand}" />
-                    <MenuItem Header="Підприємства" Command="{Binding ViewCompanyListCommand}" />
+                <MenuItem Header="{x:Static res:Resources.MenuItemDirectories}">
+                    <MenuItem Header="{x:Static res:Resources.MenuItemEmployees}" Command="{Binding ViewEmployeeListCommand}" />
+                    <MenuItem Header="{x:Static res:Resources.MenuItemCompanies}" Command="{Binding ViewCompanyListCommand}" />
                 </MenuItem>
-                <MenuItem Header="{x:Static res:Resources.Help}">
-                    <MenuItem Header="{x:Static res:Resources.AboutApp}" />
+                <MenuItem Header="{x:Static res:Resources.MenuItemHelp}">
+                    <MenuItem Header="{x:Static res:Resources.MenuItemAbout}" />
                 </MenuItem>
             </Menu>
 
             <ToolBarTray Height="36" Grid.Row="1" VerticalAlignment="Top" DataContext="{Binding CurrentVM}" Grid.ColumnSpan="2" >
                 <ToolBar Height="36" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  >
-                    <Button x:Name="viewBtn" ToolTip="{x:Static res:Resources.View}" Command="{Binding ViewItemDetailsCommand}">
+                    <Button x:Name="viewBtn" ToolTip="{x:Static res:Resources.ViewButtonTooltip}" Command="{Binding ViewItemDetailsCommand}">
                         <Path Stretch="Uniform" Fill="#FF000000"  Data="{DynamicResource UserIcon}" />
                     </Button>
-                    <Button x:Name="createBtn" ToolTip="{x:Static res:Resources.Create}" Command="{Binding CreateItemCommand}">
+                    <Button x:Name="createBtn" ToolTip="{x:Static res:Resources.CreateButtonTooltip}" Command="{Binding CreateItemCommand}">
                         <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserAddIcon}"/>
                     </Button>
-                    <Button x:Name="delBtn" ToolTip="{x:Static res:Resources.Delete}" Command="{Binding RemoveItemCommand}">
+                    <Button x:Name="delBtn" ToolTip="{x:Static res:Resources.RemoveButtonTooltip}" Command="{Binding RemoveItemCommand}">
                         <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserDeleteIcon}"/>
                     </Button>
                     <Separator />
-                    <TextBlock Text="{x:Static res:Resources.Filter}" Margin="0,7,0,4" ></TextBlock>
-                    <ComboBox IsReadOnly="True" SelectedValuePath="Key" SelectedValue="{Binding FilterType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="150" ItemsSource="{Binding FilterList}" DisplayMemberPath="Value" SelectedIndex="0" />
-                    <TextBox Style="{StaticResource placeHolder}" Tag="Введіть значення..." Width="150" Margin="0,5,0,4" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="{x:Static res:Resources.FilterLabel}" Margin="0,7,0,4" ></TextBlock>
+                    <ComboBox IsReadOnly="True" 
+                              SelectedValuePath="Key" 
+                              SelectedValue="{Binding FilterType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                              Width="150" ItemsSource="{Binding FilterList}"
+                              DisplayMemberPath="Value" 
+                              SelectedIndex="0" />
+                    <TextBox Style="{StaticResource placeHolder}" 
+                             Tag="{x:Static res:Resources.FilterPlaceholderText}" 
+                             Width="150" 
+                             Margin="0,5,0,4" 
+                             Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </ToolBar>
             </ToolBarTray>
 
@@ -79,7 +90,9 @@
                 SelectedValue="{Binding CurrentSection}"
                 SelectedValuePath="Tag" Grid.ColumnSpan="2">
 
-                <TabItem Tag="IncomingDocListVM" Header="Вхідні" DataContext="{Binding IncomingDocListVM, Mode=OneWay, Source={StaticResource Locator}}">
+                <TabItem Tag="IncomingDocListVM" 
+                         Header="{x:Static res:Resources.TabItemIncomingDocuments}" 
+                         DataContext="{Binding IncomingDocListVM, Mode=OneWay, Source={StaticResource Locator}}">
                     <DataGrid
                       Name="IncomingDocList"  
                       ItemsSource="{Binding ItemsViewSource.View}"  
@@ -94,13 +107,13 @@
                       Focusable="False">
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Дата документу" Width="175" Binding="{Binding CreatedAt}" />
-                            <DataGridTextColumn Header="Індекс" Width="100" Binding="{Binding OutgoingIndex}" />
-                            <DataGridTextColumn Header="Індекс кореспондента" Width="200" Binding="{Binding IncomingIndex}" />
-                            <DataGridTextColumn Header="Назва документу" Width="200" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Кореспондент" Width="150" Binding="{Binding Correspondent.Title}" />
-                            <DataGridTextColumn Header="Дата надходження" Width="150" Binding="{Binding ReceivedAt}" SortDirection="Descending" />
-                            <DataGridTextColumn Header="Тип документу" Width="150" Binding="{Binding DocumentType}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentCreatedAt}" Width="175" Binding="{Binding CreatedAt}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentOutgoingIndex}" Width="100" Binding="{Binding OutgoingIndex}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentIncomingIndex}" Width="200" Binding="{Binding IncomingIndex}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentName}" Width="200" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.Correspondent}" Width="150" Binding="{Binding Correspondent.Title}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentReceivedAt}" Width="150" Binding="{Binding ReceivedAt}" SortDirection="Descending" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentType}" Width="150" Binding="{Binding DocumentType}" />
                         </DataGrid.Columns>
 
                         <DataGrid.CellStyle>
@@ -128,7 +141,7 @@
 
                     </DataGrid>
                 </TabItem>
-                <TabItem Tag="OutgoingDocListVM" Header="Вихідні"  DataContext="{Binding OutgoingDocListVM, Mode=OneWay}">
+                <TabItem Tag="OutgoingDocListVM" Header="{x:Static res:Resources.TabItemOutgoingDocuments}"  DataContext="{Binding OutgoingDocListVM, Mode=OneWay}">
                     <DataGrid
                       Name="OutgoingDocList"  
                       ItemsSource="{Binding ItemsViewSource.View}"  
@@ -143,13 +156,13 @@
                       Focusable="False">
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Дата документу" Width="175" Binding="{Binding CreatedAt}" />
-                            <DataGridTextColumn Header="Індекс" Width="100" Binding="{Binding OutgoingIndex}" />
-                            <DataGridTextColumn Header="Індекс кореспондента" Width="200" Binding="{Binding IncomingIndex}" />
-                            <DataGridTextColumn Header="Назва документу" Width="200" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Кореспондент" Width="150" Binding="{Binding Correspondent.Title}" />
-                            <DataGridTextColumn Header="Дата надходження" Width="150" Binding="{Binding ReceivedAt}" SortDirection="Descending" />
-                            <DataGridTextColumn Header="Тип документу" Width="150" Binding="{Binding DocumentType}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentCreatedAt}" Width="175" Binding="{Binding CreatedAt}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentOutgoingIndex}" Width="100" Binding="{Binding OutgoingIndex}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentIncomingIndex}" Width="200" Binding="{Binding IncomingIndex}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentName}" Width="200" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.Correspondent}" Width="150" Binding="{Binding Correspondent.Title}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentReceivedAt}" Width="150" Binding="{Binding ReceivedAt}" SortDirection="Descending" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentType}" Width="150" Binding="{Binding DocumentType}" />
                         </DataGrid.Columns>
 
                         <DataGrid.CellStyle>
@@ -177,7 +190,7 @@
 
                     </DataGrid>
                 </TabItem>
-                <TabItem Tag="InternalDocListVM" Header="Внутрішні" DataContext="{Binding InternalDocListVM, Mode=OneWay}">
+                <TabItem Tag="InternalDocListVM" Header="{x:Static res:Resources.TabItemInternalDocuments}" DataContext="{Binding InternalDocListVM, Mode=OneWay}">
                     <DataGrid
                       Name="InternalDocList"  
                       ItemsSource="{Binding ItemsViewSource.View}"  
@@ -192,14 +205,14 @@
                       Focusable="False">
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Дата документу" Width="175" Binding="{Binding CreatedAt}" />
-                            <DataGridTextColumn Header="Індекс адресанта" Width="100" Binding="{Binding OutgoingIndex}" />
-                            <DataGridTextColumn Header="Індекс адресата" Width="200" Binding="{Binding IncomingIndex}" />
-                            <DataGridTextColumn Header="Назва документу" Width="200" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Адресат" Width="150" Binding="{Binding Addressee.DisplayName}" />
-                            <DataGridTextColumn Header="Адресант" Width="150" Binding="{Binding Addresser.DisplayName}" SortDirection="Descending" />
-                            <DataGridTextColumn Header="Дата надходження" Width="150" Binding="{Binding ReceivedAt}" />
-                            <DataGridTextColumn Header="Тип документу" Width="150" Binding="{Binding DocumentType}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentCreatedAt}" Width="175" Binding="{Binding CreatedAt}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.AddresserIndex}" Width="100" Binding="{Binding OutgoingIndex}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.AddresseeIndex}" Width="200" Binding="{Binding IncomingIndex}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentName}" Width="200" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentAddressee}" Width="150" Binding="{Binding Addressee.DisplayName}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentAddresser}" Width="150" Binding="{Binding Addresser.DisplayName}" SortDirection="Descending" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentReceivedAt}" Width="150" Binding="{Binding ReceivedAt}" />
+                            <DataGridTextColumn Header="{x:Static res:Resources.DocumentType}" Width="150" Binding="{Binding DocumentType}" />
                         </DataGrid.Columns>
 
                         <DataGrid.CellStyle>

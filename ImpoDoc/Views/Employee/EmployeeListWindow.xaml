@@ -16,7 +16,7 @@
         DataContext="{Binding EmployeeListVM, Mode=OneWay, Source={StaticResource Locator}}" Visibility="Visible">
 
     <Window.Resources>
-        <ResourceDictionary Source="/ImpoDoc;component/Properties/IconDictionary.xaml" />
+        <ResourceDictionary Source="/ImpoDoc;component/Properties/ApplicationDictionary.xaml" />
     </Window.Resources>
 
     <extToolkit:BusyIndicator BusyContent="{Binding Path=(common:BusyStatus.Content)}" IsBusy="{Binding Path=(common:BusyStatus.IsBusy)}">
@@ -29,19 +29,19 @@
 
             <ToolBarTray Height="36" Grid.Row="0" VerticalAlignment="Top" >
                 <ToolBar Height="36" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  >
-                    <Button ToolTip="{x:Static res:Resources.View}" Command="{Binding ViewItemDetailsCommand}">
+                    <Button ToolTip="{x:Static res:Resources.ViewButtonTooltip}" Command="{Binding ViewItemDetailsCommand}">
                         <Path Stretch="Uniform" Fill="#FF000000"  Data="{DynamicResource UserIcon}" />
                     </Button>
-                    <Button ToolTip="{x:Static res:Resources.Create}" Command="{Binding CreateItemCommand}">
+                    <Button ToolTip="{x:Static res:Resources.CreateButtonTooltip}" Command="{Binding CreateItemCommand}">
                         <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserAddIcon}"/>
                     </Button>
-                    <Button ToolTip="{x:Static res:Resources.Delete}" Command="{Binding RemoveItemCommand}">
+                    <Button ToolTip="{x:Static res:Resources.RemoveButtonTooltip}" Command="{Binding RemoveItemCommand}">
                         <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserDeleteIcon}"/>
                     </Button>
                     <Separator />
-                    <TextBlock Text="{x:Static res:Resources.Filter}" Margin="0,7,0,4" ></TextBlock>
+                    <TextBlock Text="{x:Static res:Resources.FilterLabel}" Margin="0,7,0,4" ></TextBlock>
                     <ComboBox IsReadOnly="True" SelectedValuePath="Key" SelectedValue="{Binding FilterType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="150" ItemsSource="{Binding FilterList}" DisplayMemberPath="Value" SelectedIndex="0" BorderBrush="LightGray" />
-                    <TextBox Style="{StaticResource placeHolder}" Tag="Введіть значення..." Width="150" Margin="0,5,0,4" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Style="{StaticResource placeHolder}" Tag="{x:Static res:Resources.FilterPlaceholderText}" Width="150" Margin="0,5,0,4" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </ToolBar>
             </ToolBarTray>
 
@@ -59,12 +59,12 @@
                       Focusable="False">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{x:Static res:Resources.LastName}" Width="100" Binding="{Binding LastName}" SortDirection="Ascending"/>
-                    <DataGridTextColumn Header="{x:Static res:Resources.FirstName}" Width="100" Binding="{Binding FirstName}" />
-                    <DataGridTextColumn Header="{x:Static res:Resources.MiddleName}" Width="100" Binding="{Binding MiddleName}" />
-                    <DataGridTextColumn Header="{x:Static res:Resources.Department}" Width="100" Binding="{Binding Department}" />
-                    <DataGridTextColumn Header="{x:Static res:Resources.Email}" Width="100" Binding="{Binding Email}" />
-                    <DataGridTextColumn Header="{x:Static res:Resources.PhoneNumber}" Width="100" Binding="{Binding PhoneNumber}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.EmployeeLastName}" Width="100" Binding="{Binding LastName}" SortDirection="Ascending"/>
+                    <DataGridTextColumn Header="{x:Static res:Resources.EmployeeFirstName}" Width="100" Binding="{Binding FirstName}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.EmployeeMiddleName}" Width="100" Binding="{Binding MiddleName}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.EmployeeDepartment}" Width="100" Binding="{Binding Department}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.EmployeeEmail}" Width="100" Binding="{Binding Email}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.EmployeePhoneNumber}" Width="100" Binding="{Binding PhoneNumber}" />
                 </DataGrid.Columns>
 
                 <DataGrid.CellStyle>

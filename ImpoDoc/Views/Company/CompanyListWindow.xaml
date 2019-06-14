@@ -1,14 +1,14 @@
 ﻿<Window x:Class="ImpoDoc.Views.CompanyListWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:res="clr-namespace:ImpoDoc.Properties"
         xmlns:common="clr-namespace:ImpoDoc.Common"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:res="clr-namespace:ImpoDoc.Properties"
         mc:Ignorable="d"
-        Title="Список організацій" 
+        Title="{x:Static res:Resources.CompanyListTitle}"  
         Height="380" 
         Width="642.336" 
         WindowStartupLocation="CenterOwner" 
@@ -29,19 +29,28 @@
 
             <ToolBarTray Height="36" Grid.Row="0" VerticalAlignment="Top" >
                 <ToolBar Height="36" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  >
-                    <Button ToolTip="{x:Static res:Resources.View}" Command="{Binding ViewItemDetailsCommand}">
-                        <Path Stretch="Uniform" Fill="#FF000000"  Data="{DynamicResource CompanyIcon}" />
+                    <Button x:Name="viewBtn" ToolTip="{x:Static res:Resources.ViewButtonTooltip}" Command="{Binding ViewItemDetailsCommand}">
+                        <Path Stretch="Uniform" Fill="#FF000000"  Data="{DynamicResource UserIcon}" />
                     </Button>
-                    <Button ToolTip="{x:Static res:Resources.Create}" Command="{Binding CreateItemCommand}">
-                        <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource CompanyAddIcon}"/>
+                    <Button x:Name="createBtn" ToolTip="{x:Static res:Resources.CreateButtonTooltip}" Command="{Binding CreateItemCommand}">
+                        <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserAddIcon}"/>
                     </Button>
-                    <Button ToolTip="{x:Static res:Resources.Delete}" Command="{Binding RemoveItemCommand}">
-                        <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource CompanyRemoveIcon}"/>
+                    <Button x:Name="delBtn" ToolTip="{x:Static res:Resources.RemoveButtonTooltip}" Command="{Binding RemoveItemCommand}">
+                        <Path Stretch="Uniform" Fill="#FF000000" Data="{DynamicResource UserDeleteIcon}"/>
                     </Button>
                     <Separator />
-                    <TextBlock Text="{x:Static res:Resources.Filter}" Margin="0,7,0,4" ></TextBlock>
-                    <ComboBox IsReadOnly="True" SelectedValuePath="Key" SelectedValue="{Binding FilterType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="150" ItemsSource="{Binding FilterList}" DisplayMemberPath="Value" SelectedIndex="0" />
-                    <TextBox Style="{StaticResource placeHolder}" Tag="Введіть значення..." Width="150" Margin="0,5,0,4" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="{x:Static res:Resources.FilterLabel}" Margin="0,7,0,4" ></TextBlock>
+                    <ComboBox IsReadOnly="True" 
+                              SelectedValuePath="Key" 
+                              SelectedValue="{Binding FilterType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                              Width="150" ItemsSource="{Binding FilterList}"
+                              DisplayMemberPath="Value" 
+                              SelectedIndex="0" />
+                    <TextBox Style="{StaticResource placeHolder}" 
+                             Tag="{x:Static res:Resources.FilterPlaceholderText}" 
+                             Width="150" 
+                             Margin="0,5,0,4" 
+                             Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </ToolBar>
             </ToolBarTray>
 
@@ -59,10 +68,10 @@
                       Focusable="False">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Назва" Width="175" Binding="{Binding Title}" SortDirection="Ascending"/>
-                    <DataGridTextColumn Header="Місто" Width="100" Binding="{Binding Location}" />
-                    <DataGridTextColumn Header="Адреса" Width="200" Binding="{Binding LegalAddress}" />
-                    <DataGridTextColumn Header="Керівник" Width="150" Binding="{Binding Director}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.CompanyName}" Width="175" Binding="{Binding Title}" SortDirection="Ascending"/>
+                    <DataGridTextColumn Header="{x:Static res:Resources.CompanyLocation}" Width="100" Binding="{Binding Location}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.CompanyLegalAddress}" Width="200" Binding="{Binding LegalAddress}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.CompanyDirector}" Width="150" Binding="{Binding Director}" />
                 </DataGrid.Columns>
 
                 <DataGrid.CellStyle>

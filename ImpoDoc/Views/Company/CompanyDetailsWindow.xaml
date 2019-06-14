@@ -6,11 +6,12 @@
         x:Name="CompanyDetailsWnd"
         x:Class="ImpoDoc.Views.CompanyDetailsWindow"
         mc:Ignorable="d"
-        Title="Інформація про підприємство" 
+        Title="{x:Static res:Resources.CompanyInfoTitle}"  
         Height="335" 
         Width="450" 
         WindowStartupLocation="CenterOwner" 
         ResizeMode="NoResize"
+
         DataContext="{Binding CompanyDetailsVM, Mode=OneWay, Source={StaticResource Locator}}">
 
     <Window.Resources>
@@ -53,16 +54,16 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Title"
+            <TextBlock Text="{x:Static res:Resources.CompanyName}"
                 Height="19"
                 Margin="0,7,31,4" />
-            <TextBox x:Name="Title"
+            <TextBox x:Name="CompanyName"
                 Margin="3"
                 Grid.Row="0"
                 Grid.Column="1" 
                 Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
-            <TextBlock Text="Location"
+            <TextBlock Text="{x:Static res:Resources.CompanyLocation}"
                 Margin="0,7,6,3"
                 Grid.Row="1"
                 Height="20" />
@@ -72,7 +73,7 @@
                 Grid.Column="1" 
                 Text="{Binding Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
-            <TextBlock Text="LegalAddress"
+            <TextBlock Text="{x:Static res:Resources.CompanyLegalAddress}"
                 Margin="0,7,6,3"
                 Grid.Row="2"
                 Height="20" />
@@ -82,7 +83,7 @@
                 Grid.Column="1" 
                 Text="{Binding LegalAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
-            <TextBlock Text="MailingAddress"
+            <TextBlock Text="{x:Static res:Resources.CompanyEmail}"
                 Margin="0,7,6,3"
                 Grid.Row="3"
                 Height="20" />
@@ -92,7 +93,7 @@
                 Grid.Column="1" 
                 Text="{Binding MailingAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
-            <TextBlock Text="INN"
+            <TextBlock Text="{x:Static res:Resources.CompanyInn}"
                 Margin="0,7,6,3"
                 Grid.Row="4"
                 Height="20" />
@@ -102,7 +103,7 @@
                 Grid.Column="1" 
                 Text="{Binding INN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
-            <TextBlock Text="PhoneNumber"
+            <TextBlock Text="{x:Static res:Resources.CompanyPhone}"
                 Margin="0,7,6,3"
                 Grid.Row="5"
                 Height="20" />
@@ -112,7 +113,7 @@
                 Grid.Column="1" 
                 Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
-            <TextBlock Text="Director"
+            <TextBlock Text="{x:Static res:Resources.CompanyDirector}"
                 Grid.Row="6"
                 Margin="0,9,0,0"
                 Height="21" />
@@ -130,7 +131,7 @@
             Margin="0,10,3,-35"
             Width="80"
             Height="25"
-            Content="{x:Static res:Resources.Save}" 
+            Content="{x:Static res:Resources.SaveButton}" 
             Command="{Binding Path=SaveCommand}" 
             CommandParameter="{Binding ElementName=CompanyDetailsWnd, Mode=OneWay}" />
     </Grid>
