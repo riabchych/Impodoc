@@ -11,15 +11,16 @@
         Title="{x:Static res:Resources.EmployeeListTitle}" 
         Height="450" 
         Width="800" 
+        Background="#FFEEF5FD"
         WindowStartupLocation="CenterOwner" 
-        DataContext="{Binding EmployeeListVM, Mode=OneWay, Source={StaticResource Locator}}">
+        DataContext="{Binding EmployeeListVM, Mode=OneWay, Source={StaticResource Locator}}" Visibility="Visible">
 
     <Window.Resources>
         <ResourceDictionary Source="/ImpoDoc;component/Properties/IconDictionary.xaml" />
     </Window.Resources>
 
     <extToolkit:BusyIndicator BusyContent="{Binding Path=(common:BusyStatus.Content)}" IsBusy="{Binding Path=(common:BusyStatus.IsBusy)}">
-        <Grid>
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="36" />
                 <RowDefinition />
@@ -39,17 +40,49 @@
                     </Button>
                     <Separator />
                     <TextBlock Text="{x:Static res:Resources.Filter}" Margin="0,7,0,4" ></TextBlock>
-                    <TextBox Width="150" Margin="0,5,0,4"></TextBox>
+                    <ComboBox IsReadOnly="True" SelectedValuePath="Key" SelectedValue="{Binding FilterType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="150" ItemsSource="{Binding FilterList}" DisplayMemberPath="Value" SelectedIndex="0" BorderBrush="LightGray" />
+                    <TextBox Style="{StaticResource placeHolder}" Tag="Введіть значення..." Width="150" Margin="0,5,0,4" Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </ToolBar>
             </ToolBarTray>
 
-            <ListView SelectedItem="{Binding SelectedItem}" 
-                SelectionMode="Single" 
-                Name="EmployeeList" 
-                Grid.Row="1" 
-                VerticalAlignment="Stretch" 
-                HorizontalAlignment="Stretch" 
-                ItemsSource="{Binding Items}">
+            <DataGrid Grid.Row="1" 
+                      Name="EmployeeList"  
+                      ItemsSource="{Binding ItemsViewSource.View}"  
+                      SelectedItem="{Binding SelectedItem}"
+                      VerticalAlignment="Stretch" 
+                      HorizontalAlignment="Stretch" 
+                      Margin="0,10,0,0" 
+                      AutoGenerateColumns="False" 
+                      GridLinesVisibility="Horizontal" 
+                      SelectionMode="Single" 
+                      IsReadOnly="True" 
+                      Focusable="False">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{x:Static res:Resources.LastName}" Width="100" Binding="{Binding LastName}" SortDirection="Ascending"/>
+                    <DataGridTextColumn Header="{x:Static res:Resources.FirstName}" Width="100" Binding="{Binding FirstName}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.MiddleName}" Width="100" Binding="{Binding MiddleName}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.Department}" Width="100" Binding="{Binding Department}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.Email}" Width="100" Binding="{Binding Email}" />
+                    <DataGridTextColumn Header="{x:Static res:Resources.PhoneNumber}" Width="100" Binding="{Binding PhoneNumber}" />
+                </DataGrid.Columns>
+
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+
+                <DataGrid.VerticalGridLinesBrush>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+                </DataGrid.VerticalGridLinesBrush>
+                <DataGrid.HorizontalGridLinesBrush>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.InactiveBorderColorKey}}"/>
+                </DataGrid.HorizontalGridLinesBrush>
 
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
@@ -57,19 +90,9 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
 
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="{x:Static res:Resources.LastName}" Width="100" DisplayMemberBinding="{Binding LastName}"/>
-                        <GridViewColumn Header="{x:Static res:Resources.FirstName}" Width="100" DisplayMemberBinding="{Binding FirstName}" />
-                        <GridViewColumn Header="{x:Static res:Resources.MiddleName}" Width="100" DisplayMemberBinding="{Binding MiddleName}" />
-                        <GridViewColumn Header="{x:Static res:Resources.Department}" Width="100" DisplayMemberBinding="{Binding Department}" />
-                        <GridViewColumn Header="{x:Static res:Resources.Email}" Width="100" DisplayMemberBinding="{Binding Email}" />
-                        <GridViewColumn Header="{x:Static res:Resources.PhoneNumber}" Width="100" DisplayMemberBinding="{Binding PhoneNumber}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            </DataGrid>
 
-            <StatusBar Grid.Row="2" VerticalAlignment="Stretch" >
+            <StatusBar Grid.Row="2" VerticalAlignment="Stretch" Background="#FFEEF5FD" >
                 <TextBlock Name="StatusText" Text="{Binding StatusText}"></TextBlock>
             </StatusBar>
         </Grid>
