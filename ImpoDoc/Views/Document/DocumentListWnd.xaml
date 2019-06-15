@@ -51,7 +51,7 @@
                     <MenuItem Header="{x:Static res:Resources.MenuItemCompanies}" Command="{Binding ViewCompanyListCommand}" />
                 </MenuItem>
                 <MenuItem Header="{x:Static res:Resources.MenuItemHelp}">
-                    <MenuItem Header="{x:Static res:Resources.MenuItemAbout}" />
+                    <MenuItem Header="{x:Static res:Resources.MenuItemAbout}" Command="{Binding ViewAboutWindowCommand}" />
                 </MenuItem>
             </Menu>
 

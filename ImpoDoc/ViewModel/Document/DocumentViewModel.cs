@@ -1,4 +1,5 @@
 ﻿using ImpoDoc.Commands;
+using ImpoDoc.Common;
 using ImpoDoc.Ioc;
 using ImpoDoc.Views;
 
@@ -89,6 +90,22 @@ namespace ImpoDoc.ViewModel
                 return _removeItemCommand ?? (_removeItemCommand = new RelayCommand<object>(obj =>
                 {
                     ((RelayCommand<object>)CurrentVM.GetType().GetProperty("RemoveItemCommand").GetValue(CurrentVM, null)).Execute(true);
+                }, CanExecute));
+            }
+        }
+
+
+        
+
+        private RelayCommand<object> _viewAboutWindowCommand;
+        public RelayCommand<object> ViewAboutWindowCommand
+        {
+            get
+            {
+                return _viewAboutWindowCommand ?? (_viewAboutWindowCommand = new RelayCommand<object>(obj =>
+                {
+                    About about = new About();
+                    about.Show();
                 }, CanExecute));
             }
         }
