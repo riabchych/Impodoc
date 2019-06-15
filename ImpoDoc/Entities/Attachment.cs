@@ -56,7 +56,7 @@ namespace ImpoDoc.Entities
         {
             string path = System.IO.Path.GetTempFileName() + System.IO.Path.GetExtension(Path);
             @File.WriteAllBytes(path, Content);
-            Logger.Debug($"Створенно тимчасовий файл: {path}");
+            Logger.Debug($"{Properties.Resources.LoggerCreatedTempFile}: {path}");
             return path;
         }
 
@@ -67,7 +67,7 @@ namespace ImpoDoc.Entities
             process.StartInfo.FileName = path;
             process.Exited += (s, e) => @File.Delete(path);
             process.Start();
-            Logger.Debug($"Відбулось відкриття тимчасового файлу {path} зовнішньою програмою");
+            Logger.Debug(Properties.Resources.LoggerOpenTempFile);
         }
 
         public void CreateAndPrintFile()
@@ -91,8 +91,7 @@ namespace ImpoDoc.Entities
                 };
                 process.Exited += (s, e) => @File.Delete(path);
                 process.Start();
-                Logger.Debug($"Відбулось друкування тимчасового файлу {path} ");
-
+                Logger.Debug(Properties.Resources.LoggerPrintTempFile);
             }
         }
 
