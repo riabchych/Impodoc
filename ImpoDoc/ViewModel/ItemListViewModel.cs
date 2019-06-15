@@ -31,21 +31,20 @@ namespace ImpoDoc.ViewModel
             ItemsViewSource.Source = Items;
             ItemsViewSource.View.Filter += ItemsFilter;
             ItemsViewSource.View.CollectionChanged += View_CollectionChanged;
-            Logger.Debug($"Відбулось оновлення даних в колекції");
             UpdateStatusBar();
         }
 
         protected void View_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Logger.Debug($"Відбулася зміна даних в колекції");
+            Logger.Debug(Properties.Resources.LoggerCollectionUpdated);
             if (ItemsViewSource == null) return;
             UpdateStatusBar();
         }
 
         private void UpdateStatusBar()
         {
-            StatusText = $"Всього елементів: {(Items != null ? Items.Count : 0)}";
-            Logger.Debug($"Відбулось оновлення рядка стану");
+            StatusText = $"{Properties.Resources.StatusBarElementCount} {(Items != null ? Items.Count : 0)}";
+            Logger.Debug(Properties.Resources.LoggerStatusBarUpdated);
         }
 
         public virtual Dictionary<string, string> FilterList

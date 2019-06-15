@@ -7,7 +7,6 @@ using ImpoDoc.Views.Document.Outgoing;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace ImpoDoc.ViewModel
@@ -16,22 +15,23 @@ namespace ImpoDoc.ViewModel
     {
         protected override ItemDetailsViewModel<OutgoingDocument> ItemDetailsVM => IocKernel.Get<OutgoingDocDetailsViewModel>();
         private OutgoingDocDetailsWnd ItemDetailsWnd => IocKernel.Get<OutgoingDocDetailsWnd>();
+
         public override Dictionary<string, string> FilterList => new Dictionary<string, string>
         {
-            { "Name",  "Назва документа" },
-            { "OutgoingIndex",  "Індекс документа"},
-            { "IncomingIndex", "Індекс кореспондента" },
-            { "DocumentType", "Тип документа" },
-            { "Description", "Короткий зміст" },
-            { "Location", "Місце знаходження" },
+            { "Name",  Properties.Resources.DocumentName },
+            { "OutgoingIndex",  Properties.Resources.DocumentOutgoingIndex},
+            { "IncomingIndex", Properties.Resources.DocumentIncomingIndex},
+            { "DocumentType", Properties.Resources.DocumentType },
+            { "Description", Properties.Resources.DocumentDescription },
+            { "Location", Properties.Resources.DocumentLocation },
         };
         public async Task LoadDataAsync()
         {
-            BusyStatus.Content = "Завантаження списку вихідних документів...";
+            BusyStatus.Content = Properties.Resources.LoadingOutDocList;
             {
                 using (var context = new DatabaseContext())
                 {
-                    Logger.Debug("Завантаження списку вихідних документів...");
+                    Logger.Debug(Properties.Resources.LoadingOutDocList);
                     List<OutgoingDocument> items = await Task.Run(() => context.OutgoingDocuments
                            .Include(document => document.Attachment)
                            .Include(document => document.Checkout)
@@ -41,7 +41,7 @@ namespace ImpoDoc.ViewModel
                                .ThenInclude(execution => execution.Executor)
                            .ToListAsync());
                     UpdateItemsViewSource(items);
-                    Logger.Debug("Завантаження списку вихідних документів закінчено");
+                    Logger.Debug(Properties.Resources.LoadedOutDocList);
                 }
             }
         }
@@ -74,11 +74,11 @@ namespace ImpoDoc.ViewModel
                                   context.SaveChanges();
                                   _ = Items.Remove(SelectedItem);
                                   transaction.Commit();
-                                  Logger.Debug("Виконана транзакція по видаленню вихідного документа");
+                                  Logger.Debug(Properties.Resources.LoggerTransactionRemoveOutDocExecuted);
                               }
                               catch (Exception e)
                               {
-                                  Logger.Debug("Транзакція по видаленню вихідного документа закінчилася з помилкою");
+                                  Logger.Debug(Properties.Resources.LoggerTransactionRemoveOutDocError);
                                   Logger.Error(e.StackTrace);
                                   transaction.Rollback();
                               }
@@ -112,7 +112,7 @@ namespace ImpoDoc.ViewModel
                         if (isNew)
                         {
                             Items.Add(ItemDetailsVM.ActiveItem);
-                            Logger.Debug("Виконано додання нового вихідного документа");
+                            Logger.Debug(Properties.Resources.LoggerAddedNewOutDoc);
                         }
                         else
                         {
@@ -122,13 +122,14 @@ namespace ImpoDoc.ViewModel
                             {
                                 Items[index] = ItemDetailsVM.ActiveItem;
                             }
+                            Logger.Debug(Properties.Resources.LoggerUpdatedOutDoc);
                         }
                         transaction.Commit();
-                        Logger.Debug("Виконано зміну даних існуючого вихідного документа");
+                        Logger.Debug(Properties.Resources.LoggerTransactionUpdatedOutDocExecuted);
                     }
                     catch (Exception e)
                     {
-                        Logger.Debug("Транзакція по внесенню даних вихідного документа закінчилася з помилкою");
+                        Logger.Debug(Properties.Resources.LoggerTransactionUpdatedOutDocError);
                         Logger.Error(e.StackTrace);
                         transaction.Rollback();
                     }

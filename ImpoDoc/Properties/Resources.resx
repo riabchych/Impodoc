@@ -264,6 +264,120 @@
   <data name="InternalListTitle" xml:space="preserve">
     <value>Внутрішній документ</value>
   </data>
+  <data name="LoadedEmployeesList" xml:space="preserve">
+    <value>Завантаження списку працівників закінчено</value>
+  </data>
+  <data name="LoadedIncDocList" xml:space="preserve">
+    <value>Завантаження списку вхідних документів закінчено</value>
+  </data>
+  <data name="LoadedIntDocList" xml:space="preserve">
+    <value>Завантаження списку внутрішніх документів закінчено</value>
+  </data>
+  <data name="LoadedOutDocList" xml:space="preserve">
+    <value>Завантаження списку вихідних документів закінчено</value>
+  </data>
+  <data name="LoadingEmployeesList" xml:space="preserve">
+    <value>Завантаження списку працівників...</value>
+  </data>
+  <data name="LoadingIncDocList" xml:space="preserve">
+    <value>Завантаження списку вхідних документів...</value>
+  </data>
+  <data name="LoadingIntDocList" xml:space="preserve">
+    <value>Завантаження списку внутрішніх документів...</value>
+  </data>
+  <data name="LoadingOutDocList" xml:space="preserve">
+    <value>Завантаження списку вихідних документів...</value>
+  </data>
+  <data name="LoggerAddedNewEmployee" xml:space="preserve">
+    <value>Виконано додання нового працівника</value>
+  </data>
+  <data name="LoggerAddedNewIncDoc" xml:space="preserve">
+    <value>Виконано додання нового вхідних документа</value>
+  </data>
+  <data name="LoggerAddedNewIntDoc" xml:space="preserve">
+    <value>Виконано додання нового внутрішнього документа</value>
+  </data>
+  <data name="LoggerAddedNewOutDoc" xml:space="preserve">
+    <value>Виконано додання нового вихідного документа</value>
+  </data>
+  <data name="LoggerCollectionUpdated" xml:space="preserve">
+    <value>Відбулось оновлення даних в колекції</value>
+  </data>
+  <data name="LoggerCreatedTempFile" xml:space="preserve">
+    <value>Створенно тимчасовий файл</value>
+  </data>
+  <data name="LoggerLoadedIoc" xml:space="preserve">
+    <value>Відбулось заванаження IoC</value>
+  </data>
+  <data name="LoggerOpenTempFile" xml:space="preserve">
+    <value>Відбулось відкриття тимчасового файлу зовнішньою програмою</value>
+  </data>
+  <data name="LoggerPrintTempFile" xml:space="preserve">
+    <value>Відбулось друкування тимчасового файлу</value>
+  </data>
+  <data name="LoggerStatusBarUpdated" xml:space="preserve">
+    <value>Відбулось оновлення рядка стану</value>
+  </data>
+  <data name="LoggerTransactionRemoveEmployeeError" xml:space="preserve">
+    <value>Транзакція по видаленню працівника закінчилася з помилкою</value>
+  </data>
+  <data name="LoggerTransactionRemoveEmployeeExecuted" xml:space="preserve">
+    <value>Виконана транзакція по видаленню працівника</value>
+  </data>
+  <data name="LoggerTransactionRemoveIncDocError" xml:space="preserve">
+    <value>Транзакція по видаленню вхідних документа закінчилася з помилкою</value>
+  </data>
+  <data name="LoggerTransactionRemoveIncDocExecuted" xml:space="preserve">
+    <value>Виконана транзакція по видаленню вхідних документа</value>
+  </data>
+  <data name="LoggerTransactionRemoveIntDocError" xml:space="preserve">
+    <value>Транзакція по видаленню внутрішнього документа закінчилася з помилкою</value>
+  </data>
+  <data name="LoggerTransactionRemoveIntDocExecuted" xml:space="preserve">
+    <value>Виконана транзакція по видаленню внутрішнього документа</value>
+  </data>
+  <data name="LoggerTransactionRemoveOutDocError" xml:space="preserve">
+    <value>Транзакція по видаленню вихідного документа закінчилася з помилкою</value>
+  </data>
+  <data name="LoggerTransactionRemoveOutDocExecuted" xml:space="preserve">
+    <value>Виконана транзакція по видаленню вихідного документа</value>
+  </data>
+  <data name="LoggerTransactionUpdatedEmployeeError" xml:space="preserve">
+    <value>Транзакція по внесенню даних працівника закінчилася з помилкою</value>
+  </data>
+  <data name="LoggerTransactionUpdatedEmployeeExecuted" xml:space="preserve">
+    <value>Виконана транзакція по внесенню даних працівника</value>
+  </data>
+  <data name="LoggerTransactionUpdatedIncDocError" xml:space="preserve">
+    <value>Транзакція по внесенню даних вхідних документа закінчилася з помилкою</value>
+  </data>
+  <data name="LoggerTransactionUpdatedIncDocExecuted" xml:space="preserve">
+    <value>Виконана транзакція по внесенню даних вхідних документа</value>
+  </data>
+  <data name="LoggerTransactionUpdatedIntDocError" xml:space="preserve">
+    <value>Транзакція по внесенню даних внутрішнього документа закінчилася з помилкою</value>
+  </data>
+  <data name="LoggerTransactionUpdatedIntDocExecuted" xml:space="preserve">
+    <value>Виконана транзакція по внесенню даних внутрішнього документа</value>
+  </data>
+  <data name="LoggerTransactionUpdatedOutDocError" xml:space="preserve">
+    <value>Транзакція по внесенню даних вихідного документа закінчилася з помилкою</value>
+  </data>
+  <data name="LoggerTransactionUpdatedOutDocExecuted" xml:space="preserve">
+    <value>Виконана транзакція по внесенню даних вихідного документа</value>
+  </data>
+  <data name="LoggerUpdatedEmployee" xml:space="preserve">
+    <value>Виконано зміну даних існуючого працівника</value>
+  </data>
+  <data name="LoggerUpdatedIncDoc" xml:space="preserve">
+    <value>Виконано зміну даних існуючого вхідних документа</value>
+  </data>
+  <data name="LoggerUpdatedIntDoc" xml:space="preserve">
+    <value>Виконано зміну даних існуючого внутрішнього документа</value>
+  </data>
+  <data name="LoggerUpdatedOutDoc" xml:space="preserve">
+    <value>Виконано зміну даних існуючого вихідного документа</value>
+  </data>
   <data name="MenuItemAbout" xml:space="preserve">
     <value>Про програму</value>
   </data>
@@ -317,6 +431,9 @@
   </data>
   <data name="SaveButton" xml:space="preserve">
     <value>Зберегти</value>
+  </data>
+  <data name="StatusBarElementCount" xml:space="preserve">
+    <value>Всього елементів:</value>
   </data>
   <data name="TabItemIncomingDocuments" xml:space="preserve">
     <value>Вхідні</value>

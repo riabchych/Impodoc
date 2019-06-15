@@ -502,6 +502,348 @@ namespace ImpoDoc.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Завантаження списку працівників закінчено.
+        /// </summary>
+        public static string LoadedEmployeesList {
+            get {
+                return ResourceManager.GetString("LoadedEmployeesList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Завантаження списку вхідних документів закінчено.
+        /// </summary>
+        public static string LoadedIncDocList {
+            get {
+                return ResourceManager.GetString("LoadedIncDocList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Завантаження списку внутрішніх документів закінчено.
+        /// </summary>
+        public static string LoadedIntDocList {
+            get {
+                return ResourceManager.GetString("LoadedIntDocList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Завантаження списку вихідних документів закінчено.
+        /// </summary>
+        public static string LoadedOutDocList {
+            get {
+                return ResourceManager.GetString("LoadedOutDocList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Завантаження списку працівників....
+        /// </summary>
+        public static string LoadingEmployeesList {
+            get {
+                return ResourceManager.GetString("LoadingEmployeesList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Завантаження списку вхідних документів....
+        /// </summary>
+        public static string LoadingIncDocList {
+            get {
+                return ResourceManager.GetString("LoadingIncDocList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Завантаження списку внутрішніх документів....
+        /// </summary>
+        public static string LoadingIntDocList {
+            get {
+                return ResourceManager.GetString("LoadingIntDocList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Завантаження списку вихідних документів....
+        /// </summary>
+        public static string LoadingOutDocList {
+            get {
+                return ResourceManager.GetString("LoadingOutDocList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконано додання нового працівника.
+        /// </summary>
+        public static string LoggerAddedNewEmployee {
+            get {
+                return ResourceManager.GetString("LoggerAddedNewEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконано додання нового вхідних документа.
+        /// </summary>
+        public static string LoggerAddedNewIncDoc {
+            get {
+                return ResourceManager.GetString("LoggerAddedNewIncDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконано додання нового внутрішнього документа.
+        /// </summary>
+        public static string LoggerAddedNewIntDoc {
+            get {
+                return ResourceManager.GetString("LoggerAddedNewIntDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконано додання нового вихідного документа.
+        /// </summary>
+        public static string LoggerAddedNewOutDoc {
+            get {
+                return ResourceManager.GetString("LoggerAddedNewOutDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Відбулось оновлення даних в колекції.
+        /// </summary>
+        public static string LoggerCollectionUpdated {
+            get {
+                return ResourceManager.GetString("LoggerCollectionUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Створенно тимчасовий файл.
+        /// </summary>
+        public static string LoggerCreatedTempFile {
+            get {
+                return ResourceManager.GetString("LoggerCreatedTempFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Відбулось заванаження IoC.
+        /// </summary>
+        public static string LoggerLoadedIoc {
+            get {
+                return ResourceManager.GetString("LoggerLoadedIoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Відбулось відкриття тимчасового файлу зовнішньою програмою.
+        /// </summary>
+        public static string LoggerOpenTempFile {
+            get {
+                return ResourceManager.GetString("LoggerOpenTempFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Відбулось друкування тимчасового файлу.
+        /// </summary>
+        public static string LoggerPrintTempFile {
+            get {
+                return ResourceManager.GetString("LoggerPrintTempFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Відбулось оновлення рядка стану.
+        /// </summary>
+        public static string LoggerStatusBarUpdated {
+            get {
+                return ResourceManager.GetString("LoggerStatusBarUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Транзакція по видаленню працівника закінчилася з помилкою.
+        /// </summary>
+        public static string LoggerTransactionRemoveEmployeeError {
+            get {
+                return ResourceManager.GetString("LoggerTransactionRemoveEmployeeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконана транзакція по видаленню працівника.
+        /// </summary>
+        public static string LoggerTransactionRemoveEmployeeExecuted {
+            get {
+                return ResourceManager.GetString("LoggerTransactionRemoveEmployeeExecuted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Транзакція по видаленню вхідних документа закінчилася з помилкою.
+        /// </summary>
+        public static string LoggerTransactionRemoveIncDocError {
+            get {
+                return ResourceManager.GetString("LoggerTransactionRemoveIncDocError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконана транзакція по видаленню вхідних документа.
+        /// </summary>
+        public static string LoggerTransactionRemoveIncDocExecuted {
+            get {
+                return ResourceManager.GetString("LoggerTransactionRemoveIncDocExecuted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Транзакція по видаленню внутрішнього документа закінчилася з помилкою.
+        /// </summary>
+        public static string LoggerTransactionRemoveIntDocError {
+            get {
+                return ResourceManager.GetString("LoggerTransactionRemoveIntDocError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконана транзакція по видаленню внутрішнього документа.
+        /// </summary>
+        public static string LoggerTransactionRemoveIntDocExecuted {
+            get {
+                return ResourceManager.GetString("LoggerTransactionRemoveIntDocExecuted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Транзакція по видаленню вихідного документа закінчилася з помилкою.
+        /// </summary>
+        public static string LoggerTransactionRemoveOutDocError {
+            get {
+                return ResourceManager.GetString("LoggerTransactionRemoveOutDocError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконана транзакція по видаленню вихідного документа.
+        /// </summary>
+        public static string LoggerTransactionRemoveOutDocExecuted {
+            get {
+                return ResourceManager.GetString("LoggerTransactionRemoveOutDocExecuted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Транзакція по внесенню даних працівника закінчилася з помилкою.
+        /// </summary>
+        public static string LoggerTransactionUpdatedEmployeeError {
+            get {
+                return ResourceManager.GetString("LoggerTransactionUpdatedEmployeeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконана транзакція по внесенню даних працівника.
+        /// </summary>
+        public static string LoggerTransactionUpdatedEmployeeExecuted {
+            get {
+                return ResourceManager.GetString("LoggerTransactionUpdatedEmployeeExecuted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Транзакція по внесенню даних вхідних документа закінчилася з помилкою.
+        /// </summary>
+        public static string LoggerTransactionUpdatedIncDocError {
+            get {
+                return ResourceManager.GetString("LoggerTransactionUpdatedIncDocError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконана транзакція по внесенню даних вхідних документа.
+        /// </summary>
+        public static string LoggerTransactionUpdatedIncDocExecuted {
+            get {
+                return ResourceManager.GetString("LoggerTransactionUpdatedIncDocExecuted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Транзакція по внесенню даних внутрішнього документа закінчилася з помилкою.
+        /// </summary>
+        public static string LoggerTransactionUpdatedIntDocError {
+            get {
+                return ResourceManager.GetString("LoggerTransactionUpdatedIntDocError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконана транзакція по внесенню даних внутрішнього документа.
+        /// </summary>
+        public static string LoggerTransactionUpdatedIntDocExecuted {
+            get {
+                return ResourceManager.GetString("LoggerTransactionUpdatedIntDocExecuted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Транзакція по внесенню даних вихідного документа закінчилася з помилкою.
+        /// </summary>
+        public static string LoggerTransactionUpdatedOutDocError {
+            get {
+                return ResourceManager.GetString("LoggerTransactionUpdatedOutDocError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконана транзакція по внесенню даних вихідного документа.
+        /// </summary>
+        public static string LoggerTransactionUpdatedOutDocExecuted {
+            get {
+                return ResourceManager.GetString("LoggerTransactionUpdatedOutDocExecuted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконано зміну даних існуючого працівника.
+        /// </summary>
+        public static string LoggerUpdatedEmployee {
+            get {
+                return ResourceManager.GetString("LoggerUpdatedEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконано зміну даних існуючого вхідних документа.
+        /// </summary>
+        public static string LoggerUpdatedIncDoc {
+            get {
+                return ResourceManager.GetString("LoggerUpdatedIncDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконано зміну даних існуючого внутрішнього документа.
+        /// </summary>
+        public static string LoggerUpdatedIntDoc {
+            get {
+                return ResourceManager.GetString("LoggerUpdatedIntDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Виконано зміну даних існуючого вихідного документа.
+        /// </summary>
+        public static string LoggerUpdatedOutDoc {
+            get {
+                return ResourceManager.GetString("LoggerUpdatedOutDoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Про програму.
         /// </summary>
         public static string MenuItemAbout {
@@ -660,6 +1002,15 @@ namespace ImpoDoc.Properties {
         public static string SaveButton {
             get {
                 return ResourceManager.GetString("SaveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Всього елементів:.
+        /// </summary>
+        public static string StatusBarElementCount {
+            get {
+                return ResourceManager.GetString("StatusBarElementCount", resourceCulture);
             }
         }
         

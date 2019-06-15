@@ -7,7 +7,6 @@ using ImpoDoc.Views;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace ImpoDoc.ViewModel
@@ -18,22 +17,22 @@ namespace ImpoDoc.ViewModel
         private EmployeeDetailsWindow ItemDetailsWnd => IocKernel.Get<EmployeeDetailsWindow>();
         public override Dictionary<string, string> FilterList => new Dictionary<string, string>
         {
-            { "FirstName",  "Ім'я" },
-            { "LastName",  "Прізвище"},
-            { "MiddleName", "По батькові" },
-            { "Email", "Ел. пошта" },
-            { "Department", "Відділ" },
-            { "PhoneNumber", "Номер телефону" }
+            { "FirstName", Properties.Resources.EmployeeFirstName },
+            { "LastName", Properties.Resources.EmployeeLastName},
+            { "MiddleName", Properties.Resources.EmployeeMiddleName },
+            { "Email", Properties.Resources.EmployeeEmail },
+            { "Department", Properties.Resources.EmployeeDepartment },
+            { "PhoneNumber", Properties.Resources.EmployeePhoneNumber }
         };
 
         public async Task LoadDataAsync()
         {
-            BusyStatus.Content = "Завантаження списку працівників...";
+            BusyStatus.Content = Properties.Resources.LoadingEmployeesList;
             using (var context = new DatabaseContext())
             {
-                Logger.Debug("Завантаження списку працівників...");
+                Logger.Debug(Properties.Resources.LoadingEmployeesList);
                 List<Employee> items = await Task.Run(() => context.Employees.ToListAsync());
-                Logger.Debug("Завантаження списку працівників закінчено");
+                Logger.Debug(Properties.Resources.LoadedEmployeesList);
                 UpdateItemsViewSource(items);
             }
         }
@@ -60,11 +59,11 @@ namespace ImpoDoc.ViewModel
                                   context.SaveChanges();
                                   _ = Items.Remove(SelectedItem);
                                   transaction.Commit();
-                                  Logger.Debug("Виконана транзакція по видаленню працівника");
+                                  Logger.Debug(Properties.Resources.LoggerTransactionRemoveEmployeeExecuted);
                               }
-                              catch(Exception e)
+                              catch (Exception e)
                               {
-                                  Logger.Debug("Транзакція по видаленню працівника закінчилася з помилкою");
+                                  Logger.Debug(Properties.Resources.LoggerTransactionRemoveEmployeeError);
                                   Logger.Error(e.StackTrace);
                                   transaction.Rollback();
                               }
@@ -92,7 +91,7 @@ namespace ImpoDoc.ViewModel
                                 context.Employees.Add(ItemDetailsVM.ActiveItem);
                                 context.SaveChanges();
                                 Items.Add(ItemDetailsVM.ActiveItem);
-                                Logger.Debug("Виконано додання нового працівника");
+                                Logger.Debug(Properties.Resources.LoggerAddedNewEmployee);
                             }
                             else
                             {
@@ -103,15 +102,15 @@ namespace ImpoDoc.ViewModel
                                 {
                                     Items[index] = ItemDetailsVM.ActiveItem;
                                 }
-                                Logger.Debug("Виконано зміну даних існуючого працівника");
+                                Logger.Debug(Properties.Resources.LoggerUpdatedEmployee);
                             }
 
                             transaction.Commit();
-                            Logger.Debug("Виконана транзакція по внесенню даних працівника");
+                            Logger.Debug(Properties.Resources.LoggerTransactionUpdatedEmployeeExecuted);
                         }
                         catch (Exception e)
                         {
-                            Logger.Debug("Транзакція по внесенню даних працівника закінчилася з помилкою");
+                            Logger.Debug(Properties.Resources.LoggerTransactionUpdatedEmployeeError);
                             Logger.Error(e.StackTrace);
                             transaction.Rollback();
                         }

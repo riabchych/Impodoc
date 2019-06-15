@@ -1,8 +1,7 @@
-﻿using ImpoDoc.ViewModel;
-using Ninject.Modules;
+﻿using ImpoDoc.Common.Logger;
+using ImpoDoc.ViewModel;
 using ImpoDoc.Views;
-using ImpoDoc.Common;
-using ImpoDoc.Common.Logger;
+using Ninject.Modules;
 
 namespace ImpoDoc.Ioc
 {
@@ -41,7 +40,7 @@ namespace ImpoDoc.Ioc
             Bind<OutgoingDocDetailsViewModel>().ToSelf().InSingletonScope();
             Bind<DocumentViewModel>().ToSelf().InSingletonScope();
 
-            Logger.Debug("Відбулось зв'язування IoC");
+            Logger.Debug(Properties.Resources.LoggerLoadedIoc);
         }
     }
 }
