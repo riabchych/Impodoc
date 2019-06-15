@@ -33,7 +33,7 @@ namespace ImpoDoc
                 await IocKernel.Get<OutgoingDocListViewModel>().LoadDataAsync();
                 await IocKernel.Get<InternalDocListViewModel>().LoadDataAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Logger.Debug(e.StackTrace);
             }

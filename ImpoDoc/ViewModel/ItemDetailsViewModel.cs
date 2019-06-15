@@ -44,12 +44,12 @@ namespace ImpoDoc.ViewModel
                   }));
             }
         }
-        
+
         private bool CanSave(object param)
         {
             return !HasError();
         }
 
-        
+
     }
 }

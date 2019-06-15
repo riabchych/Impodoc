@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ImpoDoc.Entities
 {
     [Table("Internal_docs")]
-    public class InternalDocument: Document
+    public class InternalDocument : Document
     {
         public InternalDocument() : base()
         {

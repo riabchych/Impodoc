@@ -18,7 +18,7 @@ namespace ImpoDoc.ViewModel
         public DocumentViewModel()
         {
             CurrentSection = "IncomingDocListVM";
-            CurrentVM = GetCurrentVM() ;
+            CurrentVM = GetCurrentVM();
         }
 
         public object CurrentVM
@@ -95,7 +95,7 @@ namespace ImpoDoc.ViewModel
         }
 
 
-        
+
 
         private RelayCommand<object> _viewAboutWindowCommand;
         public RelayCommand<object> ViewAboutWindowCommand

@@ -61,7 +61,7 @@ namespace ImpoDoc.ViewModel
                                   transaction.Commit();
                                   Logger.Debug("Виконана транзакція по видаленню організації");
                               }
-                              catch(Exception e)
+                              catch (Exception e)
                               {
                                   Logger.Debug("Транзакція по видаленню організації закінчилася з помилкою");
                                   Logger.Error(e.StackTrace);

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ImpoDoc.Entities
 {
     [Table("Checkouts")]
-    public class Checkout: BaseEntity<Checkout>
+    public class Checkout : BaseEntity<Checkout>
     {
         public DateTime Date
         {

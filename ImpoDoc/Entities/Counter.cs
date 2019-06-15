@@ -3,7 +3,7 @@
 namespace ImpoDoc.Entities
 {
     [Table("Counters")]
-    public class Counter: BaseEntity<Counter>
+    public class Counter : BaseEntity<Counter>
     {
         public int Sheets
         {

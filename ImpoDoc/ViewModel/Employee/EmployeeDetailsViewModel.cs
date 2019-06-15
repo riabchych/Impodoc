@@ -2,7 +2,7 @@
 
 namespace ImpoDoc.ViewModel
 {
-    public class EmployeeDetailsViewModel: ItemDetailsViewModel<Employee>
+    public class EmployeeDetailsViewModel : ItemDetailsViewModel<Employee>
     {
     }
 }

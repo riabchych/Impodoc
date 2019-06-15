@@ -111,7 +111,7 @@ namespace ImpoDoc.Common
             {
                 var validationResult = results.First();
                 error = validationResult.ErrorMessage;
-                
+
                 if (!Errors.Contains(propertyName))
                 {
                     Errors.Add(propertyName);
